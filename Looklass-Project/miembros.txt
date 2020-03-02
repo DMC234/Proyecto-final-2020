@@ -1,0 +1,3 @@
+David Tarriño Barrionuevo - Front-end HTML + CSS + JS.
+Eduardo Martín Montero - Responsive  y auxiliar de Front-end  y Back-end.
+Eduardo del Río Rodríguez - Back-end y BBDD.
