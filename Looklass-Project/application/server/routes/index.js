@@ -5,14 +5,15 @@ const router = Express.Router();
 module.exports = ()=>{
 
     //RUTA INDEX
+    
     router.get('/',(request, response)=>{
-        response.end('RUTA INDICE');
+        response.render('index');
     })
 
 
     //RUTA BUSQUEDA
     router.get('/busqueda',(request, response)=>{
-        response.end('RUTA busqueda');
+        response.render('busqueda');
     })
 
 
