@@ -1,0 +1,96 @@
+/*Prototipo*/
+*{
+    margin: 0;
+    padding: 0;
+}
+
+/*Encabezado*/
+.main-menu{
+    width: 100vw;
+    height: 80vh;
+    background-image: url("../img/music-and-studing.jpg");
+    background-size: cover;
+}
+
+    /*Menu de navegación*/
+.main-menu>nav{
+    width: auto;
+    height: 10vh;
+    background-color:rgba(133, 181, 204, 0.98);
+    display: flex;
+}
+
+.main-menu-navegacion{
+    width: 33.5%;
+    height: 10vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight: bold;
+    letter-spacing: 0.5vw;
+}
+    /*Capa de la imagen del header*/
+.main-menu>div{
+    width: auto;
+    height: 70vh;
+    /*OBLIGATORIO PARA USAR FLEXBOX*/
+    display: flex;
+    justify-content: center;
+    background-color: rgba(210, 218, 226,0.5);
+}
+
+.main-menu-capa-logo{
+    width: 35vw;
+    height: 70vh;
+}
+
+.main-menu-capa-logo>div{
+    display: flex;
+}
+        /*LOGO*/
+.main-menu-capa-logo>div:nth-child(1){
+    width: auto;
+    height: 45vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-menu-capa-logo>div:nth-child(1)>img{
+    width: 22vw;
+}
+
+        /*BOTÓN DE BÚSQUEDA Y TEXTO.*/
+.main-menu-capa-logo>div:nth-child(2){
+    width: auto;
+    height: 25vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#eslogan{
+    letter-spacing: 0.25vw;
+    font-weight: bold;
+    color: white;
+}
+
+#btn-busqueda{
+    margin-top: 1vw;
+    border-radius: 25px;
+    padding: 1% 0%;
+    width: 15vw;
+    text-align: center;
+    text-decoration: none;
+    font-size: 2vw;
+    background-color: #0fbcf9;
+    color: white;
+    transition: 0.5s;
+}
+
+#btn-busqueda:hover{
+    transition: 0.5s;
+    background-color: rgba(133, 181, 204, 0.98);
+}
+
+
