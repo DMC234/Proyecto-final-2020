@@ -72,7 +72,7 @@
 #eslogan{
     letter-spacing: 0.25vw;
     font-weight: bold;
-    color: white;
+    color: rgb(2, 66, 185);
 }
 
 #btn-busqueda{
@@ -93,4 +93,50 @@
     background-color: rgba(133, 181, 204, 0.98);
 }
 
+.section{
+    width: 100vw;
+    height:45vh;
+    display: flex;
+}
 
+.section>div:nth-child(1){
+    height:45vh ;
+    width: 70vw;
+    
+}
+.section>div:nth-child(1)>a>img{
+    height:45vh ;  
+    width: 70vw;
+}
+.section>div:nth-child(2){
+    height:45vh ;
+    
+    width: 40vw;
+    background-image: url("/prototipos/img/ortegaygst.PNG");
+    background-size: cover;
+}
+.section1{
+    width: 100vw;
+    height:45vh;
+    background-color: rgb(26, 235, 165);
+    display: flex;
+}
+.section1>div:nth-child(1){
+    height:45vh;
+    width: 40vw;
+    background-image: url("/prototipos/img/hcn.PNG");
+    background-size: cover; 
+}
+.section1>div:nth-child(2){
+    height:45vh;
+    width: 70vw;  
+}
+
+.foot{
+    background-color:rgba(133, 181, 204, 0.98);
+    width: 100vw;
+    height: 3vw;
+}
+#ic1{
+   height:8vh ; width:4vw ;
+}
