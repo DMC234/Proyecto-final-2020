@@ -49,9 +49,4 @@ const centro = db.define('usuarios',{
 
 });
 
-centro.hasOne(usuarios,{
-    foreignKey:'idUsuario'
-});
-
-usuarios.belongsTo(centro);
 module.exports = centro;
