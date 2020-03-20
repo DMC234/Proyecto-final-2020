@@ -22,12 +22,12 @@ class builder {
             capa_contenido[posicion].style.display = 'block';
             boton_termino[posicion].firstElementChild.setAttribute('class', 'term_fold');
             boton_termino[posicion].firstElementChild.setAttribute('src', './img/actions/recoger.png');
-            cuerpo[posicion].style.height = '30vh';
+            cuerpo[posicion].style.height = '40vh';
         }else if(boton_termino[posicion].firstElementChild.getAttribute('class') == 'term_fold'){
             capa_contenido[posicion].style.display = 'none';
             boton_termino[posicion].firstElementChild.setAttribute('class', 'term_unfold');
             boton_termino[posicion].firstElementChild.setAttribute('src', './img/actions/desplegar.png');
-            cuerpo[posicion].style.height = '15vh';
+            cuerpo[posicion].style.height = '17vh';
         }
     }
 
