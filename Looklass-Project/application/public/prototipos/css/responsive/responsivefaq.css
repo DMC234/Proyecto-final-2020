@@ -54,13 +54,6 @@
     .pie_pagina_caja:first-child>article{
         font-size: 3vw;
     }
-
-    .pie_pagina_caja:first-child>article:nth-child(2){
-        width: 19.5%;
-        font-weight: bold;
-        color: rgb(2, 66, 185);
-        font-size: 4vw;
-    }
         /*2º CUADRO*/
     .pie_pagina_caja:nth-child(2){
         display: none;
