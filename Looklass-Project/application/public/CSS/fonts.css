@@ -13,3 +13,11 @@ h1, h2, h3, h4, h5, h6{
 p, input{
     font-family: 'Roboto', sans-serif;
 }
+
+
+
+/*general*/
+
+.underscore{
+    border-bottom: solid 1px silver;
+}

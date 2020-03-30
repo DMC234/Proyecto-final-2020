@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%=titulox%> | <%=pagina%></title>
+    <link rel="stylesheet" href="/css/recuperacion.css">
+    <link rel="stylesheet" href="/css/fonts.css">
+    <link rel="stylesheet" href="/css/responsive/responsiverecuperacion.css">
+</head>
+<body>
+     <!--Encabezado-->
+     <header id="encabezado">
+        <nav>
+            <div class="encabezado_caja">
+                <img src="/img/logo.png" alt="" srcset="">
+            </div>
+        </nav>
+    </header>
+    <!--Sección de Recuperación de contraseña-->
+    <section id="seccion_recuperacion">
+        <form action="/usuario/<%=id%>" method="post">
+            <div class="form_fila">
+                <input type="text" id="c_contrasena_1" name="c_contrasena_1" placeholder="Contraseña nueva">
+            </div>
+            <div class="form_fila">
+                <input type="text" id="c_contrasena_2" name="c_contrasena_2" placeholder="Repite la contraseña">
+            </div>
+            <div class="form_fila">
+                <input type="submit" value="Cambiar Contraseña">
+            </div>
+        
+        </form>
+    </section>
+</body>
+</html>

@@ -26,6 +26,7 @@ a{
     height: 10vh;
     background-color:rgba(133, 181, 204, 0.98);
     display: flex;
+    font-size: 1.2vw;
 }
 
 .encabezado_caja{
@@ -82,7 +83,7 @@ a{
     margin-top: 1vw;
     border-radius: 25px;
     padding: 0.8% 0%;
-    width: 15vw;
+    width: 30%;
     text-align: center;
     text-decoration: none;
     font-size: 2vw;
@@ -104,7 +105,7 @@ a{
     top: 0;
     right: 0;
     width: 50%;
-    height: 51vh;
+    height: 71vh;
     background-color: rgba(0, 0, 0, 0.75);
     display: none;
     grid-template-columns: auto auto;
@@ -153,6 +154,16 @@ a{
     height: 40vh;
     border: solid 1px rgba(210, 218, 226,0.5);
 } 
+
+        /*4º FILA*/
+.encabezado_caja_registro_division:nth-child(4){
+    grid-column: 1 / 3;
+    height: 20vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
             /*Formulario Registro*/
 #registrar_desktop{
     width: 100%;
@@ -227,6 +238,53 @@ a{
     transition: 0.5s;
     background-color: rgba(133, 181, 204, 0.98);
 }
+
+    /*Formulario Recuperación*/
+.encabezado_caja_registro_division:nth-child(4)>p{
+    font-size: 1.3vw;
+    font-weight: bold;
+    letter-spacing: 0.4vw;
+    transition: 0.5s;
+    cursor: pointer;
+}
+.encabezado_caja_registro_division:nth-child(4)>p:hover{
+    transition: 0.5s;
+    color: rgba(72, 219, 251,0.8);
+}
+
+#sesion_recuperacion{
+    width: 100%;
+    height: 10vh;
+    margin-top: 1vw;
+    display: none;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#sesion_recuperacion>input[type="text"]{
+    width: 60%;
+    padding: 0.2vw;
+    border-radius: 10px;
+    font-weight: bold;
+    text-align: center;
+}
+
+#sesion_recuperacion>input[type="submit"]{
+    padding: 0.4vw;
+    border-radius: 5px;
+    background-color: rgba(210, 218, 226,0.5);
+    font-weight: bold;
+    color: white;
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+#sesion_recuperacion>input[type="submit"]:hover{
+    background-color: rgba(133, 181, 204, 0.98);
+    transition: 0.5s;
+    
+}
+
 /*Seccion Localizacion*/
 #seccion_localizacion{
     width: 100%;
@@ -293,6 +351,7 @@ a{
     color: rgb(2, 66, 185);
     font-weight: bold;
     letter-spacing: 0.2vw;
+    font-size: 1.3vw;
 }
 #seccion_contacto>div:nth-child(2)>article>img{
     float: left;
