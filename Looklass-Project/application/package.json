@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon server",
-    "change": "nodemon watch"
+    "change": "nodemon server watch"
   },
   "author": "Grupo Looklass",
   "license": "MIT",

@@ -16,13 +16,20 @@ module.exports = () => {
 
     //RUTA BUSQUEDA
     router.get('/busqueda', (request, response) => {
-        response.render('busqueda');
+        response.render('busqueda',{
+            pagina:'Busqueda',
+            centros:null
+        });
     });
+
+
+
 
     //RUTA DE INFORMACIÓN DE TÉRMINOS Y CONDICIONES
     router.get('/informacion',(request, response)=>{
         response.render('informacion');
     });
+
 
 
     //RUTA DE RECUPERACIÓN DE CUENTA
@@ -55,8 +62,6 @@ module.exports = () => {
             response.redirect(`/usuario/${request.params.id}`);
         }
     });
-
-
 
 
     //Formulario de Inicio
@@ -300,6 +305,94 @@ module.exports = () => {
             //Llamamos a la función asíncrona para obtener el usuario y enviar el correo
             obtenerUsuario(request.body.c_recuperacion);
         }
+    });
+
+    //Formulario de Búsqueda
+    router.post('/busqueda',(request, response)=>{
+        //AGREGAR CAMPOS TEMÁTICA Y PRECIO MÍNIMO Y MÁXIMO EN LA BBDD.
+       
+        let campos = request.body;
+        let objeto = {};
+        let arregloObjetos = [];
+        let valoracion = campos.b_valoracion;
+        let localizacion = campos.b_localizacion != '';
+        let tematica = campos.b_tematica != '';
+        
+           
+
+        async function buscarCentros(objetoCondicion){
+            let filas = await centro.findAll();
+            let array = [];
+            let tematica; 
+            let resultadosFilas = [];
+            let centrox;
+            
+                
+            console.log(campos);
+            //Recorremos todos los centros
+            for(let i = 0; i < filas.length; i++){
+                //Guardamos los valores de temática de cada tabla
+                tematica = filas[i].tematica;
+                for(let j = 0; j < tematica.length; j++){
+                    if(tematica.charAt(j) == ','){
+                        array.push(j);
+                    }
+                }
+            }
+            
+            
+            for(x = 0; x < array.length; x++){
+                let pal = array[x] - campos.b_tematica.length;
+                if(x < array.length){
+                    console.log(x);
+                    if(x == filas.length){
+                        tematica = filas[x-1].tematica
+                    }else{
+                        tematica = filas[x].tematica;
+                    }
+                    if(tematica.substr(pal, campos.b_tematica.length) == campos.b_tematica){
+                        console.log('son iguales');
+                        resultadosFilas.push(tematica);
+                    }
+                }
+            }
+
+
+            console.log(resultadosFilas);
+            centrox = await centro.findAll({
+                where:{
+                    tematica:resultadosFilas
+                }
+            });
+
+            console.log(centrox);
+        
+            
+            response.render('busqueda',{
+                pagina:'Busqueda',
+                centros:centrox
+            });
+        }
+
+        //Colocar filas de tematica en mayuscula no olvidar
+        console.log(request.body);
+
+       if(tematica){
+           objeto.tematica = campos.b_tematica;
+           buscarCentros(objeto);
+       }else if(localizacion){
+            objeto.localizacion = campos.b_localizacion;
+            buscarCentros(objeto);  
+       }else{
+            objeto.tematica = campos.b_tematica;
+            objeto.localizacion = campos.b_localizacion;
+            buscarCentros(objeto);  
+       }
+        //IDEA:
+        //DONDE EL WHERE, METER EN UNA VARIABLE EL OBJETO, EN BASE AL NÚMERO DE CAMPOS RELLENADOS.
+        //DE ESA MANERA CREAMOS UNA CONSULTA FLEXIBLE, EN LA QUE DEPENDIENDO DEL NÚMERO DE CAMPOS RELLENADOS
+        //METEMOS MÁS CAMPOS DENTRO DEL WHERE O NO.
+        //ARREGLAR LOCALIZACIÓN E IMPLEMENTAR VALORACIÓN, CONTROL DE USUARIOS Y INPUT LIST AL EJS.
     });
 
 

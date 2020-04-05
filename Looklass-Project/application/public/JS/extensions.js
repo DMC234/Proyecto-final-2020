@@ -9,6 +9,12 @@ encabezado_caja[2].firstElementChild.style.cursor = "pointer";
 const capa_contenido = document.querySelectorAll('.term_unfold_content');
 const boton_termino = document.querySelectorAll('.term_button');
 const cuerpo = document.querySelectorAll('.cuerpo');
+
+//BUSQUEDA.HTML
+const valoracion = document.querySelectorAll('.fa-star');
+
+console.log(valoracion);
+
 //Clase donde se encuentran posibles estructuras para cargar en el HTML.
 class builder {
     Formulario(operacion) {
@@ -35,7 +41,10 @@ class builder {
             cuerpo[posicion].style.height = '17vh';
         }
     }
-
+    buscarByValoracion(posicion){
+        let campo = document.getElementById(`star_${posicion+1}`);
+        campo.checked = true;
+    }
 }
 
 //Llamadas desde el HTML y otros.
@@ -44,7 +53,11 @@ const clase = new builder();
 for(let i = 0; i < boton_termino.length; i++){
     boton_termino[i].firstElementChild.addEventListener('click', () => clase.mostrarTerminos(i));
 }
-    //Accedemos a los botones de registro y cierre del formulario del index.
+//Recorremos las estrellas de valoración de búsqueda
+for(let i = 0; i < valoracion.length; i++){
+    valoracion[i].addEventListener('click',()=>clase.buscarByValoracion(i));
+}
+//Accedemos a los botones de registro y cierre del formulario del index.
 encabezado_caja[2].firstElementChild.addEventListener('click', ()=>clase.Formulario(1));
 cerrar_formulario.addEventListener('click',()=>clase.Formulario(2));
 formulario_recuperacion_enlace.addEventListener('click',()=>clase.Formulario(3));

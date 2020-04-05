@@ -14,17 +14,30 @@ apellidoReal varchar(50) not null,
 correo varchar(40) not null
 )ENGINE = InnoDB, CHARACTER SET='utf8';
 
+
 /*TABLA CENTRO*/
 CREATE TABLE centro(
 numeroCentro integer not null primary key,
-nombreCentro varchar(40) not null unique,
+nombreCentro varchar(40) not null,
 localizacion varchar(50) not null,
 precio dec(9,2) not null,
 descripionCentro longtext not null,
-img varchar(80) not null unique,
-enlace varchar(180) not null,
+img varchar(80) not null,
+enlace varchar(180) not null
+)ENGINE = InnoDB, CHARACTER SET = 'utf8';
+
+
+
+/*TABLA INTERACCIÓN*/
+CREATE TABLE interaccion(
+idUsuario integer not null,
 visita bit not null,
 valoracion dec(5,2),
-idUsuario integer not null,
-FOREIGN KEY (idUsuario) REFERENCES usuarios(idUsuario)
-)ENGINE = InnoDB, CHARACTER SET = 'utf8';
+numeroCentro integer not null,
+FOREIGN KEY (idUsuario) REFERENCES usuarios(idUsuario),
+FOREIGN KEY (numeroCentro) REFERENCES centro(numeroCentro)
+); 
+
+
+/*VALORES PREDETERMINADOS*/
+INSERT INTO usuarios (nombreUsuario, pwd, nombreReal, apellidoReal, correo) VALUES('sigil95','1234','Eduardo','del Río Rodríguez','rabahretmix@gmail.com');

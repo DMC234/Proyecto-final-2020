@@ -1,11 +1,274 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%=titulox%> | Busqueda</title>
+    <title><%=titulox%> | <%=pagina%></title>
+    <link rel="stylesheet" href="/css/busqueda.css">
+    <link rel="stylesheet" href="/css/fonts.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 </head>
+
 <body>
-    
+    <!--Encabezado-->
+    <header id="encabezado">
+        <div>
+            <nav class="encabezado_caja">
+                <div><a href="#becas">BECAS</a></div>
+                <div><img src="/IMG/logolooklass.png" alt=""></div>
+                <div><a href="">INICIAR SESIÓN</a></div>
+            </nav>
+            <div class="encabezado_caja">
+                <h2>BUSCADOR DE CENTROS</h2>
+                <h3>ENCUENTRA TU CENTRO FÁCILMENTE</h3>
+            </div>
+            <div class="encabezado_caja">
+                <form id="form_busqueda" action="/busqueda" method="POST">
+                    <div class="form_caja">
+                        <div>
+                            <article>
+                                <input type="radio" id="star_1" name="b_valoracion" value="1">
+                                <i class="fas fa-star"></i>
+                            </article>
+                            <article>
+                                <input type="radio" id="star_2" name="b_valoracion" value="2">
+                                <i class="fas fa-star"></i>
+                            </article>
+                            <article>
+                                <input type="radio" id="star_3" name="b_valoracion" value="3">
+                                <i class="fas fa-star"></i>
+                            </article>
+                            <article>
+                                <input type="radio" id="star_4" name="b_valoracion" value="4">
+                                <i class="fas fa-star"></i>
+                            </article>
+                            <article>
+                                <input type="radio" id="star_5" name="b_valoracion" value="5">
+                                <i class="fas fa-star"></i>
+                            </article>
+                        </div>  
+                    </div>
+                    <div class="form_caja">
+                        <input type="text" name="b_localizacion" placeholder="Localización">
+                    </div>
+                    <div class="form_caja">
+                        <input type="text" name="b_tematica" placeholder="Grado o Temática">
+                    </div>
+            </div>
+            <div class="encabezado_caja">
+                <input type="submit" value="BUSCAR">
+            </div>
+        </form>
+        </div>
+    </header>
+
+    <!--Sección Tendencia-->
+
+    <section id="seccion_tendencia">
+        <div>
+            <h2>LO MÁS BUSCADO</h2>
+        </div>
+        <div>
+            <div class="seccion_tendencia_caja">
+                <article></article>
+                <article>
+                    <h4>Informática</h4>
+                </article>
+            </div>
+            <div class="seccion_tendencia_caja">
+                <article></article>
+                <article>
+                    <h4>Marketing</h4>
+                </article>
+            </div>
+            <div class="seccion_tendencia_caja">
+                <article></article>
+                <article>
+                    <h4>Farmacia</h4>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!--Sección Búsqueda-->
+    <section id="seccion_busqueda">
+        <!-- <div class="lds-dual-ring"></div> -->
+
+        <%if(centros == null){%>
+
+            <h2>No hay centros para mostrar</h2>
+
+        <%}else{%>
+            <%centros.forEach((valor)=>{%>
+                <div class="seccion_busqueda_resultado">
+                    <div class="seccion_busqueda_caja"><img src="<%=valor.img%>" alt=""></div>
+                    <div class="seccion_busqueda_caja"><h4><%=valor.nombreCentro%></h4></div>
+                    <div class="seccion_busqueda_caja">
+                        <ul>
+                            <li><%=valor.tematica%></li>
+                        </ul>
+                    </div>
+                    <div class="seccion_busqueda_caja">
+                        <article id="valorar"><h4>Valorar</h4></article>
+                        <article id="visitar"><a href="<%=valor.enlace%>"><h4>Saber más</h4></a></article>
+                    </div>
+                    <div class="seccion_busqueda_caja"></div>
+                    <div class="seccion_busqueda_caja"></div>
+                </div>
+            <%})%>
+        <%}%>
+    </section>  
+        <!--BECAS-->
+
+    <!-- </div> -->
+    <!-- <div class="becas" id="becas">
+
+        <p class="caja2 text-center" style="font-size: 4vw; color: rgb(7, 7, 7); padding-top: 3vh;">Becas</p>
+        <section class="cajaBecas"> -->
+            <!--Primera beca-->
+            <!-- <section class="beca">
+                <div
+                    style="width: 100%; height: 6vh; background-color: tomato; text-align: center; margin-bottom: 0.5vh;">
+                    <p style="font-size: 2vw;">Beca Ministerio</p>
+                </div>
+                <div class="primerTercio">
+                    <div class="imgBec">
+                        <img src="/img/ministerio.jpg" class="imgBeca">
+                    </div>
+                    <div class="fecha" style="text-align: center; align-items: center;">
+                        <p style="font-size: 1.5vw; padding-left: 1.5vw;">Disponible <br> hasta el <br>12/10/2020</p>
+                    </div>
+                </div>
+                <div class="segundoTercio" style="width: 100%; height: 22vh; padding-top: 2vh; padding-left: 0.4vw;">
+                    <p style="font-size: 1vw;">
+                        -Beca básica: 200 € <br>
+                        -Cuantía fija asociada a la residencia del estudiante durante el curso escolar: 1.500 € <br>
+                        -Cuantía fija asociada a la renta del estudiante: 1.600 € <br>
+                        -Cuantía fija ligada a la excelencia en el rendimiento académico: entre 50 y 125 € </p>
+
+                </div>
+                <div class="tercerTercio">
+                    <section class="buton" style="display: flex; justify-content: center; width: 80%;">
+                        <a target="blank"
+                            href="http://www.educacionyfp.gob.es/servicios-al-ciudadano/catalogo/estudiantes/becas-ayudas/para-estudiar/formacion-profesional.html"
+                            style="text-decoration: none;padding-top: 1.5vh;">
+                            <p style="font-size: 2vw;  color: black;">Inscribirse</p>
+                        </a>
+
+                    </section>
+                </div>
+            </section> -->
+
+            <!--Segunda beca-->
+            <!-- <section class="beca">
+                <div
+                    style="width: 100%; height: 6vh; background-color: tomato; text-align: center; margin-bottom: 0.5vh;">
+                    <p style="font-size: 2vw;">Beca Segunda Oportunidad</p>
+                </div>
+                <div class="primerTercio">
+                    <div class="imgBec">
+                        <img src="/img/españaUE.jpg" class="imgBeca">
+                    </div>
+                    <div class="fecha" style="text-align: center; align-items: center;">
+                        <p style="font-size: 1.5vw; padding-left: 1.5vw;">Disponible <br> hasta el <br>12/10/2020</p>
+                    </div>
+                </div>
+                <div class="segundoTercio" style="width: 100%; height: 22vh; padding-top: 2vh; padding-left: 0.4vw;">
+                    <p style="font-size: 1vw;">
+                        -Beca básica: 700 € <br>
+                        -Cuantía fija asociada a la residencia del estudiante durante el curso escolar: 1.900 € <br>
+                        -Cuantía fija asociada a la renta del estudiante: 1.800 € <br>
+                        -Cuantía fija ligada a la excelencia en el rendimiento académico: entre 70 y 175 € </p>
+
+                </div>
+                <div class="tercerTercio">
+                    <section class="buton" style="display: flex; justify-content: center; width: 80%;">
+                        <a target="blank"
+                            href="https://www.comunidad.madrid/servicios/educacion/becas-estudio-programas-segunda-oportunidad"
+                            style="text-decoration: none;padding-top: 1.5vh;">
+                            <p style="font-size: 2vw;  color: black;">Inscribirse</p>
+                        </a>
+
+                    </section>
+                </div>
+            </section>
+
+            <!--Tercera beca-->
+            <!-- <section class="beca">
+                <div
+                    style="width: 100%; height: 6vh; background-color: tomato; text-align: center; margin-bottom: 0.5vh;">
+                    <p style="font-size: 2vw;">Beca Europea</p>
+                </div>
+                <div class="primerTercio">
+                    <div class="imgBec">
+                        <img src="/img/ue.jpg" class="imgBeca">
+                    </div>
+                    <div class="fecha" style="text-align: center; align-items: center;">
+                        <p style="font-size: 1.5vw; padding-left: 1.5vw;">Disponible <br> hasta el <br>12/10/2020</p>
+                    </div>
+                </div>
+                <div class="segundoTercio" style="width: 100%; height: 22vh; padding-top: 2vh; padding-left: 0.4vw;">
+                    <p style="font-size: 1vw;">
+                        -Beca básica: 5000 € <br>
+                        -Cuantía fija asociada a la residencia del estudiante durante el curso escolar: 500 € <br>
+                        -Cuantía fija asociada a la renta del estudiante: No<br>
+                        -Cuantía fija ligada a la excelencia en el rendimiento académico: entre 150 y 250 € </p>
+
+                </div>
+                <div class="tercerTercio">
+                    <section class="buton" style="display: flex; justify-content: center; width: 80%;">
+                        <a target="blank"
+                            href="https://europa.eu/youreurope/citizens/education/university/fees-and-financial-help/index_en.htm"
+                            style="text-decoration: none; justify-content: center; padding-top: 1.5vh;">
+                            <p style="font-size: 2vw;  color: black;">Inscribirse</p>
+                        </a>
+
+                    </section>
+                </div>
+            </section>
+        </section> --> 
+    </div>
+     <!--Pie de pagina-->
+     <footer id="pie_pagina">
+        <div class="pie_pagina_caja">
+            <article>
+                <a href="/informacion#terminos"><p>Términos y condiciones</p></a>
+            </article>
+            <article>
+                <p>&#8212;</p>
+            </article>
+            <article>
+                <a href="/informacion#faq"><p>F.A.Q</p></a>
+            </article>
+        </div>
+        <div class="pie_pagina_caja">
+            <article>
+                <p>© 2020</p>
+            </article>
+            <article>
+                <p>&#8212;</p>
+            </article>
+            <article>
+                <p>Grupo Looklass</p>
+            </article>
+        </div>
+        <div class="pie_pagina_caja">
+            <article>
+                <i class="fab fa-2x fa-facebook-square"></i>
+            </article>
+            <article>
+                <i class="fab fa-2x fa-twitter-square"></i>
+            </article>
+            <article>
+                <i class="fab fa-2x fa-instagram"></i>
+            </article>
+            <article>
+                <i class="fab fa-2x fa-linkedin"></i>
+            </article>
+        </div>
+    </footer>
 </body>
+<script src="/JS/extensions.js"></script>
 </html>
