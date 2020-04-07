@@ -9,6 +9,11 @@ a{
     color: white;
 }
 
+html{
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
 /*Efectos Externos*/
 .lds-dual-ring {
     display: inline-block;
@@ -258,7 +263,6 @@ a{
     font-size: 1.3vw;
     background-color: rgba(0, 0, 0, 0.2);
     position: relative;
-    overflow-y: hidden;
     cursor: pointer;
 }
 
@@ -309,56 +313,262 @@ a{
 
 /*SECCIÓN BÚSQUEDA*/
 #seccion_busqueda{
-    width: 96%;
-    padding: 2% 2%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    background-color: whitesmoke;
+    width: 100%;
+    height: 40vh;
+    overflow-y: scroll;
+    background-image: url("/img/backgrounds/searching2.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+    /*El display flex no permite el overflow
+    a menos que el contenido de la capa supere 
+    la altura establecida en la capa padre*/
+}
+
+#seccion_busqueda>div{
+    width: 90%;
+    height: auto;
+    padding: 1% 5%;
+    background: rgba(8, 8, 122, 0.5);
 }
     /*CSS-GRID capa de resultados*/
 .seccion_busqueda_resultado{
-    width: 85%;
+    width: 100%;
     height: 40vh;
-    border: solid 2px yellow;
-    margin-top: 2%;
-    display: grid;
-    grid-template-columns: auto auto auto;
+    margin-bottom: 1%;
+    border: outset 1px rgba(72, 219, 251,0.9);
+    background-color: rgba(61, 87, 87, 0.95);
+    color: whitesmoke;
+    border-radius: 10px;
+    display: inline-grid;
+    grid-template-columns: 40% 60%;
 }
 
 .seccion_busqueda_caja{
-    border: solid 2px red;
+    border-left: outset 1px silver;;
+    border-bottom: inset 1px silver;;
+}
+
+/*1º capa*/
+.seccion_busqueda_caja:first-child{
+    grid-row: 1/5;
+}
+
+.seccion_busqueda_caja:first-child>article{
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-    /*1º FILA - Imagen*/
-.seccion_busqueda_caja:first-child>img{
+    /*Imagen*/
+.seccion_busqueda_caja:first-child>article:first-child{
+   height: 28vh;
+   border-bottom: inset 1px silver;
+   border-radius: 15px;
+}
+
+.seccion_busqueda_caja:first-child>article:first-child>img{
     float: left;
-    width: 20%;
-}   
-    /*2º FILA - Titulo*/
-
-    /*3º FILA - Temática*/
-
-    /*4º FILA - Operaciones*/
-.seccion_busqueda_caja:nth-child(4){
-    display: flex;
+    width: 50%;
+ }
+    /*Nombre del centro y localización*/
+.seccion_busqueda_caja:first-child>article:last-child{
+    height: 11vh;
+    flex-direction: column;
+}
+.seccion_busqueda_caja:first-child>article:last-child>h3{
+    font-size: 1.5vw;
+    letter-spacing: 0.5vw;
+}
+.seccion_busqueda_caja:first-child>article:last-child>h5{
+    font-size: 0.9vw;
+    letter-spacing: 0.3vw;
+    margin-top: 0.5vw;
 }
 
-#visitar, #valorar{
-    width: 49%;
-    height: 8vh;
-    border: solid 2px red;
+/*2º capa*/
+.seccion_busqueda_caja:nth-child(2){
+    display: flex;
+    justify-content: center;
+}
+    /*Tematica*/
+.seccion_busqueda_caja:nth-child(2)>article{
+    width: auto;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    letter-spacing: 0.3vw;
+    font-size: 1.3vw;
+}
+
+/*3º y 5º capa*/
+.seccion_busqueda_caja:nth-child(3), .seccion_busqueda_caja:nth-child(5){
+    display: flex;
+}
+    /*Valoración, visitas, valorar y acceder al enlace*/
+.seccion_busqueda_caja:nth-child(3)>article, .seccion_busqueda_caja:nth-child(5)>article,
+.seccion_busqueda_caja:nth-child(5)>a{
+    width: 50%;
+    height: auto;
+    border-right: inset 1px silver;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    letter-spacing: 0.3vw;
+    font-size: 1.3vw;
+    transition: 0.5s;
+}
+.valorar{
+    cursor: pointer;
+}
+.seccion_busqueda_caja:nth-child(5)>article:hover, .seccion_busqueda_caja:nth-child(5)>a:hover{
+    transition: 0.5s;
+    background-color: rgba(72, 219, 251,0.5);
+    letter-spacing: 0.5vw;
+}
+/*4º capa*/
+    /*Texto descriptivo del centro*/
+.seccion_busqueda_caja:nth-child(4){
+    padding: 1% 1%;
+    font-size: 1.19vw;
+    letter-spacing: 0.1vw;
+    overflow-y: scroll;
+}
+
+/*Sección Becas*/
+#becas{
+    width:100%;
+    height: 60vh;
+    background-image: radial-gradient(rgba(8, 8, 122, 0.8),rgba(47, 161, 131, 0.8) );
+}
+
+#becas>div{
+    width: 100%;
+    display: flex;
+}
+    /*Titulo*/
+#becas>div:first-child{
+    height: 10vh;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 0.5vw;
+    font-size: 1.3vw;
+    color: white;
+    border-bottom: inset 2px rgba(133, 181, 204, 1.0);
+}
+    /*Cuerpo*/
+#becas>div:last-child{
+    margin-top: 1%;
+    height: 44vh;
+    justify-content: space-between;
+}
+
+.becas_caja{
+    width: 30%;
+    height: 44vh;
+    display: flex;
+    flex-direction: column;
+    border: inset 3px rgba(72, 219, 251,0.5);
+    background-color:rgba(0,0,0,0.5);
+    border-radius: 5px;
+    color: white;
+}
+.becas_caja>div, .becas_caja>a{
+    width: 100%;
+    display: flex;
+}
+/*Imagen y Fecha de Beca*/
+.becas_caja>div:first-child{
+    height: 14vh;
+    display: flex;
+    border-bottom: inset 1px silver;
+    border-radius: 5px;
+    padding: 0.7% 0%;
+}
+
+.becas_caja>div:first-child>article{
+    height: auto;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-    /*5º FILA - Vistas y Valoración*/
-    
-    /*6º FILA - Precio*/
+.becas_caja>div:first-child>article:first-child{
+    width: 40%;
+    border-right: inset 1px silver;
+    border-radius: 10px;
+}
 
+.becas_caja>div:first-child>article:first-child>img{
+    float: left;
+    width: 50%;
+}
+.becas_caja>div:first-child>article:last-child{
+    width: 60%;
+    font-size: 1.2vw;
+}
+
+/*Características de la Beca*/
+.becas_caja>div:nth-child(2){
+    width: 95%;
+    height: 20vh;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 2%;
+    font-size: 0.98vw;
+    letter-spacing: 0.05vw;
+    font-weight: bold;
+}
+
+/*Botón de enlace de acceso a la beca*/
+.enlace_becas{
+    height: 10vh;
+    justify-content: center;
+    align-items: center;
+    border-top: inset 1px silver;
+    display: inline-block;
+    position: relative;
+    border-radius: 10px;
+    transition: 0.5s;
+    font-size: 1.1vw;
+    letter-spacing: 0.2vw;
+    cursor: pointer;
+}
+   
+.enlace_becas::before, .enlace_becas::after{
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+    transform: scale(0);
+    transition: 0.5s;
+}
+
+.enlace_becas::before{
+    border-top: inset 1px silver;
+    border-right: inset 1px silver;
+    transform-origin: 100% 0%;
+    border-radius: 10px;
+}
+
+.enlace_becas::after{
+    border-bottom: inset 1px silver;
+    border-left: inset 1px silver;
+    transform-origin: 0 100%;
+    border-radius: 10px;
+}
+
+.enlace_becas:hover::after,.enlace_becas:hover::before{
+    transform: scale(1);
+}
+
+
+.enlace_becas:hover{
+   transition: 0.5s;
+   background-color: rgba(0, 0, 0, 0.4);
+}
 /*pie de pagina*/
 #pie_pagina{
     width: 100%;
