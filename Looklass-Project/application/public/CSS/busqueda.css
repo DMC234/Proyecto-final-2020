@@ -434,12 +434,39 @@ html{
     letter-spacing: 0.1vw;
     overflow-y: scroll;
 }
-
+    /*SI NO HAY FILAS - Error de búsqueda*/
+.error_busqueda{
+    width: 90%;
+    height: 40vh;
+    margin: 0% 4%;
+    border: inset 1px silver;
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.error_busqueda>h3{
+    text-align: center;
+    color: white;
+    letter-spacing: 0.5vw;
+    background-image: linear-gradient(to bottom left,rgba(47, 161, 131, 1.0), rgba(72, 219, 251,1.0),white);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 2vw;
+}
+/*Mostrar botones de la fila_resultado de la consulta con el inicio de sesión*/
+.acceso_anonimo>a{
+    /*El !important es necesario porque permite sobreescribir una propiedad de una clase
+        CSS ya definida
+    */
+    width: 100% !important;
+}
 /*Sección Becas*/
 #becas{
     width:100%;
     height: 60vh;
-    background-image: radial-gradient(rgba(8, 8, 122, 0.8),rgba(47, 161, 131, 0.8) );
+    background-image: radial-gradient(rgba(8, 8, 122, 0.8),rgba(47, 161, 131, 0.8));
 }
 
 #becas>div{

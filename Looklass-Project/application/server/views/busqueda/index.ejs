@@ -17,9 +17,15 @@
     <header id="encabezado">
         <div>
             <nav class="encabezado_caja">
+                <%if(usuario == null){%>
                 <div><a href="#becas">BECAS</a></div>
                 <div><img src="/IMG/logolooklass.png" alt=""></div>
                 <div><a href="">INICIAR SESIÓN</a></div>
+                <%}else{%>
+                <div><a href="#becas">Salir de la sesión</a></div>
+                <div><img src="/IMG/logolooklass.png" alt=""></div>
+                <div><h4>Bienvenido | <%=usuario.nombreUsuario%></h4></a></div>
+                <%}%>
             </nav>
             <div class="encabezado_caja">
                 <h2>BUSCADOR DE CENTROS</h2>
@@ -59,7 +65,7 @@
                     </div>
             </div>
             <div class="encabezado_caja">
-                <input type="submit" value="BUSCAR">
+                <input id="busqueda" type="submit" value="BUSCAR">
             </div>
         </form>
         </div>
@@ -96,62 +102,61 @@
     <!--Sección Búsqueda-->
     <section id="seccion_busqueda">
         <!-- <div class="lds-dual-ring"></div> -->
-
+        <div>
         <%if(centros == null){%>
+            <div class="error_busqueda">
+                <h3><%=aviso%></h3>
+            </div>
         <%}else{%>
             <%centros.forEach((valor)=>{%>
-                <div class="seccion_busqueda_resultado">
-                    <div class="seccion_busqueda_caja"><img src="<%=valor.img%>" alt=""></div>
-                    <div class="seccion_busqueda_caja"><h4><%=valor.nombreCentro%></h4></div>
-                    <div class="seccion_busqueda_caja">
-                        <ul>
-                            <li><%=valor.tematica%></li>
-                        </ul>
-                    </div>
-                    <div class="seccion_busqueda_caja">
-                        <article id="valorar"><h4>Valorar</h4></article>
-                        <article id="visitar"><a href="<%=valor.enlace%>"><h4>Saber más</h4></a></article>
-                    </div>
-                    <div class="seccion_busqueda_caja"></div>
-                    <div class="seccion_busqueda_caja"></div>
+            <!--HTML-CARD DE CSS -->
+            <div class="seccion_busqueda_resultado">
+                <!--1º SEGMENTO-->
+                <div class="seccion_busqueda_caja">
+                    <article>
+                        <img src="<%=valor.img%>" alt="logo_centro">
+                    </article>
+                    <article>
+                        <h3><%=valor.nombreCentro%></h3>
+                        <h5><%=valor.localizacion%></h5>
+                    </article>
                 </div>
+                <div class="seccion_busqueda_caja">
+                    <article><h3><%=valor.tematica%></h3></article>
+                </div>
+                <div class="seccion_busqueda_caja">
+                    <article><h3>9500</h3></article>
+                    <article><h3>4 &#9733;&#9733;&#9733;&#9733;</h3></article>
+                </div>
+                <div class="seccion_busqueda_caja">
+                <p><%=valor.descripcionCentro%></p>
+                </div>
+                    <!--Se comprueba si el usuario ha iniciado sesión y se refleja en el nº de opciones-->
+                    <%if(usuario != null){%>
+                    <div class="seccion_busqueda_caja">
+                    <article class="valorar">
+                        <h3>Valorar</h3>
+                    </article>
+                    <a href="/busqueda?r=<%=valor.enlace%>">
+                        <article>
+                            <h3>Saber Más</h3>
+                        </article>
+                    </a>
+                    </div>
+                    <%}else{%>
+                    <div class="seccion_busqueda_caja acceso_anonimo">
+                            <!--Jugamos con el método Get para enviar el enlace, crear la fila y redireccionar.-->
+                            <a href="/busqueda?r=<%=valor.enlace%>">
+                                <h3>Saber Más</h3>
+                            </a> 
+                    </div>  
+                    <%}%>
+                
+            </div>
             <%})%>
         <%}%>
 
-
-        <div>
-
-        
-        <!--HTML-CARD DE CSS -->
-        <div class="seccion_busqueda_resultado">
-            <!--1º SEGMENTO-->
-            <div class="seccion_busqueda_caja">
-                <article>
-                    <img src="/img/centros/101.png" alt="logo_centro">
-                </article>
-                <article>
-                    <h3>IFP</h3>
-                    <h5>Madrid</h5>
-                </article>
-            </div>
-            <div class="seccion_busqueda_caja">
-                <article><h3>Enfermeria | Informatica</h3></article>
-            </div>
-            <div class="seccion_busqueda_caja">
-                <article><h3>9500</h3></article>
-                <article><h3>4 &#9733;&#9733;&#9733;&#9733;</h3></article>
-            </div>
-            <div class="seccion_busqueda_caja">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa est repellendus blanditiis iste aut laborum 
-                consequatur perferendis corrupti? 
-                Pariatur distinctio sit expedita obcaecati non consectetur ex fugiat, nihil autem accusamus.</p>
-            </div>
-            <div class="seccion_busqueda_caja">
-                <article class="valorar"><h3>Valorar</h3></article>
-                <a href=""><article><h3>Saber Más</h3></article></a>
-            </div>
         </div>
-    </div>
     </section>  
     <!--Sección Becas-->
     <section id="becas">

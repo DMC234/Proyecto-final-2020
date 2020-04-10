@@ -12,8 +12,8 @@ const cuerpo = document.querySelectorAll('.cuerpo');
 
 //BUSQUEDA.HTML
 const valoracion = document.querySelectorAll('.fa-star');
-
-console.log(valoracion);
+const error_busqueda = document.querySelector('.error_busqueda');
+const seccion_busqueda = document.getElementById('seccion_busqueda');
 
 //Clase donde se encuentran posibles estructuras para cargar en el HTML.
 class builder {
@@ -45,6 +45,14 @@ class builder {
         let campo = document.getElementById(`star_${posicion+1}`);
         campo.checked = true;
     }
+    //Aumentar capa de la capa de los resultados por estética
+    mostrarResultadosBusqueda(){
+        if(error_busqueda.firstElementChild.textContent == ''){
+            seccion_busqueda.style.height = '0vh';
+        }else{
+            seccion_busqueda.style.height = '40vh';
+        }
+    }
 }
 
 //Llamadas desde el HTML y otros.
@@ -57,6 +65,12 @@ for(let i = 0; i < boton_termino.length; i++){
 for(let i = 0; i < valoracion.length; i++){
     valoracion[i].addEventListener('click',()=>clase.buscarByValoracion(i));
 }
+
+//Se aumenta la capa de resultados de la página busqueda.html al cargar la misma, comprobando
+//si está vacío la capa donde se muestran los resultados y el error mismamente, de esta manera
+//ahorramos codigo CSS y queda más estético.
+document.addEventListener('DOMContentLoaded',()=>clase.mostrarResultadosBusqueda());
+
 //Accedemos a los botones de registro y cierre del formulario del index.
 encabezado_caja[2].firstElementChild.addEventListener('click', ()=>clase.Formulario(1));
 cerrar_formulario.addEventListener('click',()=>clase.Formulario(2));

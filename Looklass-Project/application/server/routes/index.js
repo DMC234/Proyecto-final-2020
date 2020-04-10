@@ -3,6 +3,8 @@ const router = Express.Router();
 const usuarios = require('../models/usuarios');
 const centro = require('../models/centro');
 const nodemailer = require('nodemailer');
+//Variable general del usuario
+var usuario;
 
 //exportamos las rutas y así acceder a estas.
 module.exports = () => {
@@ -16,10 +18,19 @@ module.exports = () => {
 
     //RUTA BUSQUEDA
     router.get('/busqueda', (request, response) => {
-        response.render('busqueda',{
-            pagina:'Busqueda',
-            centros:null
-        });
+        console.log(request.query);
+        if(request.query != {}){
+            //Dentro de este método se implementa el modelo de la tabla interacción y se crea la fila 
+            //con la Id del usuario y la id del centro.
+          response.redirect(request.query.r);
+        }else{
+            response.render('busqueda',{
+                pagina:'Busqueda',
+                centros:null,
+                aviso:null,
+                usuario:null
+            });
+        }
     });
 
 
@@ -96,11 +107,18 @@ module.exports = () => {
                 .then((valor) => {
                     if (valor != null) {
                         console.log('Login correcto!');
-                        response.redirect('/busqueda');
+                        response.render('busqueda',{
+                            pagina:'Busqueda',
+                            centros:null,
+                            aviso:null,
+                            usuario:valor
+                        });
+                        usuario = valor;
 
                     } else {
                         console.log('Login incorrecto');
                         response.redirect('/');
+                        usuario = null;
                     }
                 })
                 .catch((error) => console.log(error));
@@ -309,90 +327,93 @@ module.exports = () => {
 
     //Formulario de Búsqueda
     router.post('/busqueda',(request, response)=>{
-        //AGREGAR CAMPOS TEMÁTICA Y PRECIO MÍNIMO Y MÁXIMO EN LA BBDD.
-       
+        //Valores Iniciales
         let campos = request.body;
-        let objeto = {};
-        let arregloObjetos = [];
         let valoracion = campos.b_valoracion;
         let localizacion = campos.b_localizacion != '';
         let tematica = campos.b_tematica != '';
-        
+
            
 
-        async function buscarCentros(objetoCondicion){
-            let filas = await centro.findAll();
-            let array = [];
-            let tematica; 
-            let resultadosFilas = [];
-            let centrox;
-            
-                
-            console.log(campos);
-            //Recorremos todos los centros
-            for(let i = 0; i < filas.length; i++){
-                //Guardamos los valores de temática de cada tabla
-                tematica = filas[i].tematica;
-                for(let j = 0; j < tematica.length; j++){
-                    if(tematica.charAt(j) == ','){
-                        array.push(j);
+        async function buscarCentros(){
+            //Obtenemos los valores de los formularios con comparaciones para ahorrar código
+            //a su vez también tenemos los arrays y el objeto para pasar a la función incluirResultados
+            //y así obtener las filas correspondientes.
+            let campo_tematica = campos.b_tematica;
+            let campo_localizacion = campos.b_localizacion;
+            let comprobar_valor = [0];
+            let resultados_comprobar = new Array();
+            let objetoConsulta = {};
+            var centrox;
+            console.log(campo_tematica);
+            //Función asíncrona que contiene el algoritmo para obtener las filas de temáticas
+            //y asimismo el objeto que contiene los where para personalizar la consulta del buscador.
+            async function incluirResultado(objetox){
+            let filas_tematica = await centro.findAll();
+            for(let i = 0; i < filas_tematica.length; i++){
+                let valor = filas_tematica[i].tematica;
+                if(valor.includes('|')){
+                    for(let i = 0; i < valor.length; i++){
+                        if(valor.charAt(i) == '|'){
+                            comprobar_valor.push(i);
+                        }
                     }
+                    for(let i = 0; i < comprobar_valor.length; i++){
+                        if(valor.includes(campo_tematica,comprobar_valor[i])){
+                            resultados_comprobar.push(valor);
+                        }
+                    }
+                }else{
+                    if(campo_tematica == valor){
+                        resultados_comprobar.push(valor);
+                        }
+                    }
+                }
+                //Realizamos la consulta con el array de los resultados
+                console.log('dentro de la función');
+                centrox = await centro.findAll({
+                    where:objetox  
+                });
+                //Comprobamos si hay resultados que responden a la consulta
+                if(centrox.length > 0){
+                    response.render('busqueda',{
+                        pagina:'Busqueda',
+                        centros:centrox,
+                        aviso:null,
+                        usuario:usuario
+                    });
+                }else{
+                    response.render('busqueda',{
+                        pagina:'Busqueda',
+                        centros:null,
+                        aviso:'NO HAY RESULTADOS',
+                        usuario:usuario
+                    })
                 }
             }
-            
-            
-            for(x = 0; x < array.length; x++){
-                let pal = array[x] - campos.b_tematica.length;
-                if(x < array.length){
-                    console.log(x);
-                    if(x == filas.length){
-                        tematica = filas[x-1].tematica
-                    }else{
-                        tematica = filas[x].tematica;
-                    }
-                    if(tematica.substr(pal, campos.b_tematica.length) == campos.b_tematica){
-                        console.log('son iguales');
-                        resultadosFilas.push(tematica);
-                    }
-                }
+            //Comprobamos los campos rellenados
+            if(localizacion && tematica){
+                objetoConsulta.localizacion = campos.b_localizacion;
+                objetoConsulta.tematica = resultados_comprobar;
+                incluirResultado(objetoConsulta);
+            }else if(localizacion){
+                objetoConsulta.localizacion = campos.b_localizacion;
+                incluirResultado(objetoConsulta);
+            }else if(tematica){
+                objetoConsulta.tematica = resultados_comprobar;
+                incluirResultado(objetoConsulta);
+            }else{
+                response.render('busqueda',{
+                    pagina:'Busqueda',
+                    centros:null,
+                    aviso:'NO HAY RESULTADOS',
+                    usuario:usuario
+                })
             }
+        }   
+        //Llamamos a la función asíncrona para buscar los centros
+        buscarCentros();
 
-
-            console.log(resultadosFilas);
-            centrox = await centro.findAll({
-                where:{
-                    tematica:resultadosFilas
-                }
-            });
-
-            console.log(centrox);
-        
-            
-            response.render('busqueda',{
-                pagina:'Busqueda',
-                centros:centrox
-            });
-        }
-
-        //Colocar filas de tematica en mayuscula no olvidar
-        console.log(request.body);
-
-       if(tematica){
-           objeto.tematica = campos.b_tematica;
-           buscarCentros(objeto);
-       }else if(localizacion){
-            objeto.localizacion = campos.b_localizacion;
-            buscarCentros(objeto);  
-       }else{
-            objeto.tematica = campos.b_tematica;
-            objeto.localizacion = campos.b_localizacion;
-            buscarCentros(objeto);  
-       }
-        //IDEA:
-        //DONDE EL WHERE, METER EN UNA VARIABLE EL OBJETO, EN BASE AL NÚMERO DE CAMPOS RELLENADOS.
-        //DE ESA MANERA CREAMOS UNA CONSULTA FLEXIBLE, EN LA QUE DEPENDIENDO DEL NÚMERO DE CAMPOS RELLENADOS
-        //METEMOS MÁS CAMPOS DENTRO DEL WHERE O NO.
-        //ARREGLAR LOCALIZACIÓN E IMPLEMENTAR VALORACIÓN, CONTROL DE USUARIOS Y INPUT LIST AL EJS.
     });
 
 
