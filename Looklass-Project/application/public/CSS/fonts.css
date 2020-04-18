@@ -1,0 +1,23 @@
+/*fuentes de letra de la aplicación*/
+@font-face{
+    src: url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
+    font-family: 'Roboto';
+}
+
+/*Títulos*/
+h1, h2, h3, h4, h5, h6{
+    font-family: 'Roboto', sans-serif;
+}
+
+/*CUERPO de la página*/
+p, input, a{
+    font-family: 'Roboto', sans-serif;
+}
+
+
+
+/*general*/
+
+.underscore{
+    border-bottom: solid 1px silver;
+}

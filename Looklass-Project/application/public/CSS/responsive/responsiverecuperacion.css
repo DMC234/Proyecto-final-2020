@@ -1,0 +1,74 @@
+/*RESPONSIVE recuperacion.html*/
+/*RESPONSIVE SMARTPHONE*/
+/*RESOLUCIÓN: 414 X 812Px*/
+/*Orientación Vertical*/
+@media screen and (max-width:414px) and (max-height:812px){
+    /*Prototipo*/
+    *{
+        transition: 1s;
+    }
+
+    /*Encabezado*/
+    #encabezado, #encabezado>nav, .encabezado_caja{
+        height: 20vh;
+    }
+
+    .encabezado_caja>img{
+        float: left;
+        width: 70%;
+    }
+    /*Sección Recuperación*/
+    #seccion_recuperacion{
+        height: 79vh;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+
+    #seccion_recuperacion>form{
+        width: 100%;
+        height: 89vh;
+    }
+
+    .form_fila{
+        width: 100%;
+        height: 25vh;
+        border: outset 2px rgba(163, 172, 180, 0.5);
+        display: flex;
+    }
+    .form_fila>input[type="text"], .form_fila>input[type="submit"]{
+        width: 100%;
+        height: 10vh;
+        font-size: 4vw;
+    }
+    .form_fila:last-child{
+        border-bottom: none;
+    }
+}
+
+/*Orientación Horizontal*/
+@media screen and (max-width:812px) and (max-height:414px){
+
+    /*Prototipo*/
+    *{
+        transition: 1s;
+    }
+
+    /*Encabezado*/
+    #encabezado, #encabezado>nav, .encabezado_caja{
+        height: 20vh;
+    }
+
+    .encabezado_caja>img{
+        float: left;
+        width: 30%;
+    }
+    
+    /*Sección Recuperación*/
+    #seccion_recuperacion{
+        height: 79vh;
+    }
+
+    .form_fila>input[type="text"], .form_fila>input[type="submit"]{
+        font-size: 2vw;
+    }
+}

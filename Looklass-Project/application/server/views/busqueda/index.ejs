@@ -1,11 +1,307 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title><%=titulox%> | <%=pagina%></title>
+    <link rel="stylesheet" href="/css/busqueda.css">
+    <link rel="stylesheet" href="/css/fonts.css">
+    <link rel="stylesheet" href="/css/responsive/responsivebusqueda.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 </head>
+
 <body>
-    
+    <!--Encabezado-->
+    <header id="encabezado">
+        <div>
+            <nav class="encabezado_caja">
+                <%if(usuario == null){%>
+                <div><a href="#becas">BECAS</a></div>
+                <div><img src="/IMG/logolooklass.png" alt=""></div>
+                <div><a href="">INICIAR SESIÓN</a></div>
+                <%}else{%>
+                <div><a href="/busqueda?operacion=salir_sesion">Salir de la sesión</a></div>
+                <div><img src="/IMG/logolooklass.png" alt=""></div>
+                <div><h4 id="sesion_busqueda">Bienvenido | <%=usuario.nombreUsuario%></h4></a></div>
+                <%}%>
+            </nav>
+            <div class="encabezado_caja">
+                <h2>BUSCADOR DE CENTROS</h2>
+                <h3>ENCUENTRA TU CENTRO FÁCILMENTE</h3>
+            </div>
+            <div class="encabezado_caja">
+                <form id="form_busqueda" action="/busqueda" method="POST">
+                    <div class="form_caja">
+                        <div>
+                            <article>
+                                <input type="radio" id="star_1" name="b_valoracion" value="1">
+                                <i class="fas fa-star"></i>
+                            </article>
+                            <article>
+                                <input type="radio" id="star_2" name="b_valoracion" value="2">
+                                <i class="fas fa-star"></i>
+                            </article>
+                            <article>
+                                <input type="radio" id="star_3" name="b_valoracion" value="3">
+                                <i class="fas fa-star"></i>
+                            </article>
+                            <article>
+                                <input type="radio" id="star_4" name="b_valoracion" value="4">
+                                <i class="fas fa-star"></i>
+                            </article>
+                            <article>
+                                <input type="radio" id="star_5" name="b_valoracion" value="5">
+                                <i class="fas fa-star"></i>
+                            </article>
+                        </div>  
+                    </div>
+                    <div class="form_caja">
+                        <input type="text" name="b_localizacion" placeholder="Localización">
+                    </div>
+                    <div class="form_caja">
+                        <input type="text" name="b_tematica" placeholder="Grado o Temática">
+                    </div>
+            </div>
+            <div class="encabezado_caja">
+                <input name="operacion" id="busqueda" type="submit" value="BUSCAR">
+            </div>
+        </form>
+        </div>
+    </header>
+
+    <!--Sección Tendencia-->
+
+    <section id="seccion_tendencia">
+        <div>
+            <h2>LO MÁS BUSCADO</h2>
+        </div>
+        <div>
+            <div class="seccion_tendencia_caja">
+                <article></article>
+                <article>
+                    <h4>Informática</h4>
+                </article>
+            </div>
+            <div class="seccion_tendencia_caja">
+                <article></article>
+                <article>
+                    <h4>Marketing</h4>
+                </article>
+            </div>
+            <div class="seccion_tendencia_caja">
+                <article></article>
+                <article>
+                    <h4>Farmacia</h4>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!--Sección Búsqueda-->
+    <section id="seccion_busqueda">
+        <!-- <div class="lds-dual-ring"></div> -->
+        <div>
+        <%if(centros == null){%>
+            <div class="error_busqueda">
+                <h3><%=aviso%></h3>
+            </div>
+        <%}else{%>
+            <%for(let i = 0; i < centros.length; i++){%>
+            <!--HTML-CARD DE CSS -->
+            <div class="seccion_busqueda_resultado">
+                <!--1º SEGMENTO - Logo del centro y Localización-->
+                <div class="seccion_busqueda_caja">
+                    <article>
+                        <img src="<%=centros[i].img%>" alt="logo_centro">
+                    </article>
+                    <article>
+                        <h3><%=centros[i].nombreCentro%></h3>
+                        <h5><%=centros[i].localizacion%></h5>
+                    </article>
+                </div>
+                <!--2º SEGMENTO - Temática del centro-->
+                <div class="seccion_busqueda_caja">
+                    <article><h3><%=centros[i].tematica%></h3></article>
+                </div>
+                <!--3º SEGMENTO - Visitas y Valoración-->
+                <div class="seccion_busqueda_caja">
+                    <article><h3><%=visitas[i]%></h3><i class="far fa-eye"></i></article>
+                    <article><h3><%=valoracion[i]%> &#9733;&#9733;&#9733;&#9733;</h3></article>
+                </div>
+                <!--4º SEGMENTO - Descripción del centro-->
+                <div class="seccion_busqueda_caja">
+                    <p><%=centros[i].descripcionCentro%></p>
+                </div>
+                <!--5º SEGMENTO - Valorar Centro-->
+                <div id="capa_valorar_centro" class="seccion_busqueda_caja">
+                    <form id="valorar_centro" action="/busqueda?idCentro=<%=centros[i].numeroCentro%>" method="POST">
+                        <!--Esta clase no tiene valores en CSS, es solo para JS.-->
+                        <div class="valorar_centro_checkbox">
+                            <input type="radio" name="valorar_centro" value="1">
+                            <i class="far fa-frown"></i>
+                        </div>
+                        <div class="valorar_centro_checkbox">
+                            <input type="radio" name="valorar_centro" value="2">
+                            <i class="far fa-meh"></i>
+                        </div>
+                        <div class="valorar_centro_checkbox">
+                            <input type="radio" name="valorar_centro" value="3">
+                            <i class="far fa-smile"></i>
+                        </div>
+                        <div class="valorar_centro_checkbox">
+                            <input type="radio" name="valorar_centro" value="4">
+                            <i class="far fa-grin-beam"></i>
+                            
+                        </div>
+                        <div class="valorar_centro_checkbox">
+                            <input type="radio" name="valorar_centro" value="5">
+                            <i class="far fa-grin-hearts"></i>
+                        </div>
+                    
+                </div>
+                <!--6º SEGMENTO-->
+                    <!--Se comprueba si el usuario ha iniciado sesión y se refleja en el nº de opciones-->
+                    <%if(usuario != null){%>
+                <div class="seccion_busqueda_caja">
+                    <article class="valorar">
+                        <input name="operacion" type="submit" value="Valorar">
+                    </article>
+                    <a href="/busqueda?operacion=visitar&r=<%=centros[i].enlace%>">
+                        <article>
+                            <h3>Saber Más</h3>
+                        </article>
+                    </a>
+                    </div>
+                    <%}else{%>
+                    <div class="seccion_busqueda_caja acceso_anonimo">
+                            <!--Jugamos con el método Get para enviar el enlace, crear la fila y redireccionar.-->
+                            <a href="/busqueda?operacion=visitar&r=<%=centros[i].enlace%>">
+                                <h3>Saber Más</h3>
+                            </a> 
+                    </div>  
+                    <%}%>
+                    <!--Se cierra el formulario de valoración hasta aquí para que englobe las etiquetas
+                        tanto de sesión como de anónimo-->
+                </form>
+            </div>
+            <%}%>
+        <%}%>
+        </div>
+    </section>  
+    <!--Sección Becas-->
+    <section id="becas">
+        <div><h2>BECAS</h2></div>
+        <div>
+            <!--Beca Ministerio-->
+            <article class="becas_caja">
+                <div>
+                    <article>
+                        <img src="/img/ministerio.jpg" alt="Beca_Ministerio">
+                    </article>
+                    <article>
+                        <h3>12 / 10 / 2020</h3>
+                    </article>
+                </div>
+                <div>
+                    <p>-BECA BÁSICA: 200 €</p>
+                    <p>-CUANTÍA FIJA A LA RESIDENCIA DEL ESTUDIANTE DURANTE EL CURSO ESCOLAR: 1.500 €</p>
+                    <p>-CUANTÍA FIJA A LA RENTA DEL ESTUDIANTE: 1.600 €</p>
+                    <p>-CUANTÍA FIJADA LIGADA A LA EXCELENCIA DEL RENDIMIENTO ACADÉMICO: 50 - 125 € </p>
+                </div>
+                <a class="enlace_becas" href="https://www.educacionyfp.gob.es/servicios-al-ciudadano/catalogo/estudiantes/becas-ayudas/para-estudiar/formacion-profesional.html">
+                    <div>
+                        <h3>BECAS MINISTERIO</h3>
+                    </div>
+                </a>
+            </article>
+            <!--Beca Segunda Oportunidad-->
+            <article class="becas_caja">
+                <div>
+                    <article>
+                        <img src="/img/españaUE.jpg" alt="Beca_Ministerio">
+                    </article>
+                    <article>
+                        <h3>12 / 10 / 2020</h3>
+                    </article>
+                </div>
+                <div>
+                    <p>-BECA BÁSICA: 700 €</p>
+                    <p>-CUANTÍA FIJA A LA RESIDENCIA DEL ESTUDIANTE DURANTE EL CURSO ESCOLAR: 1.900 €</p>
+                    <p>-CUANTÍA FIJA A LA RENTA DEL ESTUDIANTE: 1.800 €</p>
+                    <p>-CUANTÍA FIJADA LIGADA A LA EXCELENCIA DEL RENDIMIENTO ACADÉMICO: 70 - 175 € </p>
+                </div>
+                <a class="enlace_becas" href="https://www.comunidad.madrid/servicios/educacion/becas-estudio-programas-segunda-oportunidad">               
+                    <div>
+                        <h3>BECAS SEGUNDA OPORTUNIDAD</h3>
+                    </div>
+                </a>
+            </article>
+            <!--Beca Europea-->
+            <article class="becas_caja">
+                <div>
+                    <article>
+                        <img src="/img/ue.jpg" alt="Beca_Ministerio">
+                    </article>
+                    <article>
+                        <h3>12 / 10 / 2020</h3>
+                    </article>
+                </div>
+                <div>
+                    <p>-BECA BÁSICA: 5000 €</p>
+                    <p>-CUANTÍA FIJA A LA RESIDENCIA DEL ESTUDIANTE DURANTE EL CURSO ESCOLAR: 500 €</p>
+                    <p>-CUANTÍA FIJA A LA RENTA DEL ESTUDIANTE: NO</p>
+                    <p>-CUANTÍA FIJADA LIGADA A LA EXCELENCIA DEL RENDIMIENTO ACADÉMICO: 150 - 250 € </p>
+                </div>
+                <a class="enlace_becas" href="https://europa.eu/youreurope/citizens/education/university/fees-and-financial-help/index_en.htm">
+                    <div>
+                        <h3>BECA EUROPEA</h3>
+                    </div>
+                </a>
+            </article>
+        </div>
+    </section>
+    </div>
+     <!--Pie de pagina-->
+     <footer id="pie_pagina">
+        <div class="pie_pagina_caja">
+            <article>
+                <a href="/informacion#terminos"><p>Términos y condiciones</p></a>
+            </article>
+            <article>
+                <p>&#8212;</p>
+            </article>
+            <article>
+                <a href="/informacion#faq"><p>F.A.Q</p></a>
+            </article>
+        </div>
+        <div class="pie_pagina_caja">
+            <article>
+                <p>© 2020</p>
+            </article>
+            <article>
+                <p>&#8212;</p>
+            </article>
+            <article>
+                <p>Grupo Looklass</p>
+            </article>
+        </div>
+        <div class="pie_pagina_caja">
+            <article>
+                <i class="fab fa-2x fa-facebook-square"></i>
+            </article>
+            <article>
+                <i class="fab fa-2x fa-twitter-square"></i>
+            </article>
+            <article>
+                <i class="fab fa-2x fa-instagram"></i>
+            </article>
+            <article>
+                <i class="fab fa-2x fa-linkedin"></i>
+            </article>
+        </div>
+    </footer>
 </body>
+<script src="/JS/extensions.js"></script>
 </html>

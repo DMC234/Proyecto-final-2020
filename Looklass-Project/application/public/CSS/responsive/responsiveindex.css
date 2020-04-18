@@ -1,0 +1,144 @@
+/*RESPONSIVE PARA LA PAGINA INDEX.HTML*/
+
+/*Responsive SmartPhone*/
+
+/*Resolución MÁXIMA: 414 x 812 px*/
+
+/*Orientación Vertical*/
+
+@media screen and (max-width:414px) and (max-height:812px) {
+    /*Prototipo*/
+    * {
+        transition: 1s;
+    }
+    /*Encabezado*/
+    #encabezado {
+        height: 50vh;
+    }
+    /*Menú de navegación*/
+    #encabezado>nav {
+        font-size: 4vw;
+    }
+    .encabezado_caja_logo>div:nth-child(1) {
+        height: 24vh;
+    }
+    /*Logo*/
+    .encabezado_caja_logo {
+        float: left;
+        width: 80%;
+        height: auto;
+    }
+    /*Botón de buscar y eslogan*/
+    .encabezado_caja_logo>div:nth-child(2) {
+        height: 25vh;
+    }
+    .encabezado_caja_logo>div:nth-child(2)>h2 {
+        font-size: 4vw;
+    }
+    .encabezado_caja_logo>div:nth-child(2)>a {
+        font-size: 4vw;
+    }
+    /*Formulario de Registro y Login y Recuperación*/
+    .encabezado_caja_registro {
+        width: 100%;
+    }
+
+    .encabezado_caja_registro_division:nth-child(4)>p{
+        font-size: 4vw;
+    }
+
+    /*Sección Localización y Sección Contacto*/
+    #seccion_localizacion>div:first-child, #seccion_localizacion>div:last-child {
+        width: 100%;
+    }
+    #seccion_localizacion>div:last-child, #seccion_contacto>div:first-child {
+        display: none;
+    }
+    /*Sección Contacto*/
+    #seccion_contacto>div:nth-child(2) {
+        width: 100%;
+    }
+    #seccion_contacto>div:nth-child(2)>article {
+        width: 60%;
+        font-size: 3vw;
+        padding-left: 0% 10%;
+    }
+    #seccion_contacto>div:nth-child(2)>article>img {
+        float: left;
+        width: 20%;
+    }
+    /*Pie de Página*/
+    .pie_pagina_caja {
+        width: 49%;
+    }
+    /*1º CUADRO*/
+    .pie_pagina_caja:first-child>article {
+        font-size: 3vw;
+    }
+    /*2º CUADRO*/
+    .pie_pagina_caja:nth-child(2) {
+        display: none;
+    }
+}
+
+/*Orientación Horizontal*/
+
+@media screen and (max-width:812px) and (max-height:414px) {
+    /*Prototipo*/
+    * {
+        transition: 1s;
+    }
+
+    /*Encabezado*/
+
+    /*Menú de navegación*/
+    #encabezado>nav {
+        font-size: 2vw;
+    }
+
+    /*Boton de búsqueda y eslogan*/
+    .encabezado_caja_logo>div:nth-child(2)>h2 {
+        font-size: 2.5vw;
+    }
+
+    /*Formulario de Registro y Login*/
+    .encabezado_caja_registro {
+        width: 100%;
+        height: 75vh;
+    }
+
+    .encabezado_caja_registro_division:nth-child(2), .encabezado_caja_registro_division:nth-child(3){
+        height: 70vh;
+    } 
+
+    #registrar_desktop,  #sesion_desktop{
+        height: 60vh;
+    }
+    /*Sección Localización y Sección Contacto*/
+    #seccion_localizacion>div:first-child, #seccion_localizacion>div:last-child {
+        width: 100%;
+    }
+    #seccion_localizacion>div:last-child, #seccion_contacto>div:first-child {
+        display: none;
+    }
+    /*Seccion Contacto*/
+    #seccion_contacto, #seccion_contacto>div {
+        height: 60vh;
+    }
+    /*2º CAJA*/
+    #seccion_contacto>div:nth-child(2) {
+        width: 100%;
+    }
+    #seccion_contacto>div:nth-child(2)>article {
+        width: 33%;
+        font-size: 1.7vw;
+    }
+    #seccion_contacto>div:nth-child(2)>article>img {
+        float: left;
+        width: 15%;
+    }
+    /*Pie de Página*/
+    .pie_pagina_caja:first-child>article, .pie_pagina_caja:nth-child(2)>article {
+        font-size: 1.5vw;
+    }
+}

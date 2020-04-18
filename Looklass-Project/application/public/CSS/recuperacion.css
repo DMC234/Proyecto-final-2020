@@ -1,0 +1,105 @@
+/*Prototipo*/
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/*General*/
+
+a {
+    text-decoration: none;
+    color: white;
+}
+html{
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+::-webkit-scrollbar{
+    display: none;
+}
+
+/*Encabezado*/
+
+#encabezado {
+    width: 100%;
+    height: 10vh;
+}
+
+#encabezado>nav {
+    width: auto;
+    height: 10vh;
+    background-color: rgba(133, 181, 204, 0.98);
+    display: flex;
+    justify-content: center;
+}
+
+.encabezado_caja {
+    width: 33%;
+    height: 10vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight: bold;
+    letter-spacing: 0.5vw;
+    margin-top: 0.1%;
+    font-size: 1.2vw;
+}
+
+.encabezado_caja>img {
+    float: left;
+    width: 18.5%;
+}
+
+/*Sección Recuperación de Contraseña*/
+#seccion_recuperacion{
+    width: 100%;
+    height: 89vh;
+    background-color: whitesmoke;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+    /*Formulario*/
+#seccion_recuperacion>form{
+    width: 50%;
+    height: 60vh;
+    border: outset 2px rgba(210, 218, 226,0.5);
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(133, 181, 204, 0.50);
+    font-size: 1.2vw;
+}
+
+.form_fila{
+    width: auto;
+    height: 20vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+    /*Campos de texto y Botón del formulario*/
+.form_fila>input[type="text"]{
+    width: 80%;
+    padding: 0.2vw;
+    border-radius: 10px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.form_fila>input[type="submit"]{
+    padding: 0.4vw;
+    border-radius: 5px;
+    background-color: rgba(163, 172, 180, 0.5);
+    font-weight: bold;
+    color: white;
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+.form_fila>input[type="submit"]:hover{
+    transition: 0.5s;
+    background-color: rgba(133, 181, 204, 0.98);
+}
+

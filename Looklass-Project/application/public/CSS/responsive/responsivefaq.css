@@ -1,0 +1,120 @@
+/*RESPONSIVE PARA LA PAGINA INFORMACION.HTML*/
+
+/*Responsive SmartPhone*/
+/*Resolución MÁXIMA: 414 x 812 px*/
+/*Orientación Vertical*/
+@media screen and (max-width:414px) and (max-height:812px){
+    *{
+        transition: 1s;
+    }
+    /*Encabezado*/
+    .encabezado_caja{
+        font-size: 4vw;
+    }
+    .encabezado_caja>img {
+        float: left;
+        width: 45%;
+    }
+    /*Sección Términos y condiciones - F.A.Q*/
+    #terminos, #faq {
+        height: 40vh;
+    }
+
+    #terminos{
+        background-size: inherit;
+    }
+
+    #faq{
+        background-size: inherit;
+    }
+    .titulo{
+        font-size: 3vw;
+        padding: 3% 0%;
+        text-align: center;
+    }
+    .cuerpo>article>:first-child {
+        padding-left: 2%;
+        font-size: 4vw;
+    }
+
+    .term_unfold, .term_fold {
+        float: left;
+        width: 50%;
+    }
+
+    .term_unfold_content>p{
+        font-size: 2.7vw;
+    }
+    /*Pie de Página*/
+    .pie_pagina_caja{
+        width: 49%;
+        height: auto;
+    }
+        /*1º CUADRO*/
+    .pie_pagina_caja:first-child>article{
+        font-size: 3vw;
+    }
+        /*2º CUADRO*/
+    .pie_pagina_caja:nth-child(2){
+        display: none;
+    }
+}
+
+/*Orientación Horizontal*/
+@media screen and (max-width:812px) and (max-height:414px){
+    *{
+        transition: 1s;
+    }
+    /*Encabezado*/
+    .encabezado_caja{
+        font-size: 2vw;
+    }
+    .encabezado_caja>img {
+        float: left;
+        width: 20%;
+    }
+    /*Sección Términos y condiciones - F.A.Q*/
+
+    #terminos, #faq {
+        height: 40vh;
+    }
+    #terminos{
+        background-size: inherit;
+    }
+
+    #faq{
+        background-size: inherit;
+    }
+    .titulo{
+        font-size: 1.5vw;
+        padding: 1.5% 0%;
+        text-align: center;
+    }
+
+    .cuerpo>article>:first-child {
+        font-size: 2vw;
+    }
+
+    .term_unfold, .term_fold {
+        float: left;
+        width: 20%;
+    }
+
+    .term_unfold_content>p{
+        font-size: 2vw;
+    }
+ 
+    /*Pie de Página*/
+    .pie_pagina_caja{
+        width: 33%;
+        height: auto;
+    }
+        /*1º CUADRO*/
+    .pie_pagina_caja:first-child>article{
+        font-size: 1.5vw;
+    }
+        /*2º CUADRO*/
+    .pie_pagina_caja:nth-child(2)>article{
+        font-size: 1.5vw;
+    }
+}

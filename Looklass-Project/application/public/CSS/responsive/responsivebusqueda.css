@@ -1,0 +1,258 @@
+/*RESPONSIVE BUSQUEDA.HTML*/
+
+/*Responsive Smartphone*/
+
+/*Resolución aproximada: 414 x 812 px*/
+
+/*Orientación Vertical*/
+
+@media screen and (max-width:414px) and (max-height:812px) {
+    /*Prototipos*/
+    * {
+        transition: 1s;
+    }
+    /*Encabezado*/
+    #encabezado {
+        height: 55vh;
+    }
+    /*1ºFILA*/
+    .encabezado_caja:first-child {
+        height: 15vh;
+    }
+    .encabezado_caja:first-child>div {
+        font-size: 3vw;
+    }
+    .encabezado_caja:first-child>div>img {
+        float: left;
+        width: 50%;
+    }
+    /*2º FILA*/
+    .encabezado_caja:nth-child(2) {
+        height: 10vh;
+        font-size: 3vw;
+    }
+    /*3º FILA*/
+    .encabezado_caja:nth-child(3) {
+        height: 20vh;
+    }
+    #form_busqueda {
+        flex-direction: column;
+        align-items: center;
+    }
+    .form_caja, .form_caja>div {
+        width: 100%;
+    }
+    .form_caja>input[type="text"] {
+        width: 100%;
+        font-size: 4vw;
+    }
+    .form_caja>div>article>i {
+        font-size: 4.5vw;
+    }
+    /*4º FILA*/
+    .encabezado_caja:nth-child(4) {
+        height: 20vh;
+    }
+    .encabezado_caja:nth-child(4)>input[type="submit"] {
+        width: 50%;
+        height: 5vh;
+        font-size: 5vw;
+    }
+    /*Sección Tendencia*/
+    #seccion_tendencia {
+        height: 25vh;
+    }
+    #seccion_tendencia>div:first-child {
+        font-size: 3vw;
+    }
+    .seccion_tendencia_caja {
+        width: 29%;
+        height: 15vh;
+        border: inset 1px rgba(133, 181, 204, 1.0);
+    }
+    .seccion_tendencia_caja>article:first-child {
+        height: 10vh;
+    }
+    .seccion_tendencia_caja>article:last-child {
+        height: 5vh;
+        font-size: 3vw;
+    }
+    /*Sección Búsqueda*/
+    #seccion_busqueda {
+        height: 30vh;
+    }
+    .seccion_busqueda_resultado {
+        height: 30vh;
+    }
+    /*1º capa*/
+        /*Imagen*/
+    .seccion_busqueda_caja:first-child>article:first-child {
+        height: 18vh;
+    }
+    .seccion_busqueda_caja:first-child>article:first-child>img {
+        width: 80%;
+    }
+        /*Nombre del centro y localización*/
+    .seccion_busqueda_caja:first-child>article:last-child>h3 {
+        font-size: 4.5vw;
+    }
+    .seccion_busqueda_caja:first-child>article:last-child>h5 {
+        font-size: 2.9vw;
+    }
+    /*2º capa*/
+        /*Tematica*/
+    .seccion_busqueda_caja:nth-child(2)>article {
+        font-size: 3vw;
+    }
+    /*3º y 5º capa*/
+    .seccion_busqueda_caja:nth-child(3)>article, .seccion_busqueda_caja:nth-child(5)>article, .seccion_busqueda_caja:nth-child(5)>a {
+        font-size: 3vw;
+    }
+    /*4º capa*/
+        /*Texto descriptivo del centro*/
+    .seccion_busqueda_caja:nth-child(4) {
+        font-size: 2.4vw;
+    }
+    /*Sección Becas*/
+    #becas {
+        height: 86vh;
+    }
+        /*Titulo*/
+    #becas>div:first-child {
+        font-size: 3vw;
+    }
+        /*Cuerpo*/
+    #becas>div:last-child {
+        height: 24vh;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .becas_caja {
+        width: 95%;
+        height: 24vh;
+    }
+        /*Imagen y Fecha de Beca*/
+    .becas_caja>div:first-child>article:first-child>img {
+        width: 50%;
+    }
+    .becas_caja>div:first-child>article:last-child {
+        font-size: 3vw;
+    }
+        /*Características de la Beca*/
+    .becas_caja>div:nth-child(2) {
+        font-size: 2.5vw;
+    }
+        /*Botón de enlace de acceso a la beca*/
+    .enlace_becas {
+        font-size: 3vw;
+    }
+    /*Pie de página*/
+    .pie_pagina_caja {
+        width: 49%;
+        height: auto;
+    }
+        /*1º caja*/
+    .pie_pagina_caja:first-child>article {
+        width: 42.5%;
+        font-size: 3vw;
+    }
+        /*2º caja*/
+    .pie_pagina_caja:nth-child(2) {
+        display: none;
+    }
+}
+
+/*Orientación Horizontal*/
+
+@media screen and (max-width:812px) and (max-height:414px) {
+    /*Prototipos*/
+    * {
+        transition: 1s;
+    }
+    /*Encabezado*/
+        /*1ºFILA*/
+    .encabezado_caja:first-child>div {
+        font-size: 2vw;
+    }
+    .encabezado_caja:first-child>div>img {
+        float: left;
+        width: 30%;
+    }
+        /*2º FILA*/
+    .encabezado_caja:nth-child(2) {
+        font-size: 2vw;
+    }
+        /*3º FILA*/
+    .form_caja>input[type="text"] {
+        font-size: 2.5vw;
+    }
+    .form_caja>div>article>i {
+        font-size: 2.5vw;
+    }
+        /*4º FILA*/
+    .encabezado_caja:nth-child(4)>input[type="submit"] {
+        font-size: 3vw;
+    }
+    /*Sección Tendencia*/
+    #seccion_tendencia>div:first-child {
+        font-size: 2vw;
+    }
+    .seccion_tendencia_caja>article:last-child {
+        font-size: 2vw;
+    }
+    /*Sección Búsqueda*/
+    /*1º capa*/
+        /*Imagen*/
+    .seccion_busqueda_caja:first-child>article:first-child>img {
+        width: 80%;
+    }
+        /*Nombre del centro y localización*/
+    .seccion_busqueda_caja:first-child>article:last-child>h3 {
+        font-size: 2.5vw;
+    }
+    .seccion_busqueda_caja:first-child>article:last-child>h5 {
+        font-size: 1vw;
+    }
+    /*2º capa*/
+        /*Tematica*/
+    .seccion_busqueda_caja:nth-child(2)>article {
+        font-size: 2vw;
+    }
+    /*3º y 5º capa*/
+    .seccion_busqueda_caja:nth-child(3)>article, .seccion_busqueda_caja:nth-child(5)>article, .seccion_busqueda_caja:nth-child(5)>a {
+        font-size: 2vw;
+    }
+    /*4º capa*/
+        /*Texto descriptivo del centro*/
+    .seccion_busqueda_caja:nth-child(4) {
+        font-size: 1.4vw;
+    }
+    /*Sección Becas*/
+
+        /*Titulo*/
+    #becas>div:first-child {
+        font-size: 2vw;
+    }
+        /*Cuerpo*/
+    
+        /*Imagen y Fecha de Beca*/
+    .becas_caja>div:first-child>article:first-child>img {
+        width: 50%;
+    }
+    .becas_caja>div:first-child>article:last-child {
+        font-size: 1.5vw;
+    }
+        /*Características de la Beca*/
+    .becas_caja>div:nth-child(2) {
+        font-size: 1vw;
+    }
+        /*Botón de enlace de acceso a la beca*/
+    .enlace_becas {
+        font-size: 1.25vw;
+    }
+    /*Pie de página*/
+    .pie_pagina_caja:first-child>article,.pie_pagina_caja:nth-child(2)>article{
+        font-size: 1.5vw;
+    }
+}

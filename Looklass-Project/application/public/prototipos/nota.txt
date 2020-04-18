@@ -1,2 +1,0 @@
-Toda la parte de Front-end se desarrolla aquí, esta carpeta está pensada para desarrollar todo el diseño.
-Y así luego, copiar el código e implementarlo en el ejs y mezclarlo con Back-end.

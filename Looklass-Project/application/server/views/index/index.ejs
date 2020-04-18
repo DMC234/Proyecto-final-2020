@@ -1,11 +1,177 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title><%=titulox%> | <%=pagina%></title>
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/fonts.css">
+    <link rel="stylesheet" href="/css/responsive/responsiveindex.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 </head>
+
 <body>
-    
+    <!--ENCABEZADO DE LA WEB-->
+    <header id="encabezado">
+        <nav>
+            <div class="encabezado_caja">
+                <a href="#encabezado">
+                    <p>INICIO</p>
+                </a>
+            </div>
+            <div class="encabezado_caja">
+                <a href="#seccion_contacto">
+                    <p>CONTACTO</p>
+                </a>
+            </div>
+            <div class="encabezado_caja">
+                <p>REGISTRO</p>
+            </div>
+        </nav>
+        <div>
+            <!--Logo-->
+            <div class="encabezado_caja_logo">
+                <div>
+                    <img src="./img/logo.png" alt="logo">
+                </div>
+                <div>
+                    <h2>Tu centro ideal te está esperando</h2>
+                    <a href="/busqueda">
+                        <p>BUSCAR</p>
+                    </a>
+                </div>
+            </div>
+            <!--Formulario de registro-->
+            <div class="encabezado_caja_registro">
+                <div class="encabezado_caja_registro_division">
+                    <div>
+                        <h3>ÚNETE A NOSOTROS</h3>
+                    </div>
+                    <div class="x">
+                        <p id="cerrar">X</p>
+                    </div>
+                </div>
+                <div class="encabezado_caja_registro_division">
+                    <form id="registrar_desktop" action="/" method="post">
+                        <article>
+                            <h4>REGISTRO</h4>
+                        </article>
+                        <article>
+                            <input type="text" name="r_n_usuario" placeholder="Nombre de usuario">
+                        </article>
+                        <article>
+                            <input type="text" name="r_pwd" placeholder="Contraseña"> 
+                        </article>
+                        <article>
+                            <input type="text" name="r_n_personal" placeholder="Nombre Personal">
+                        </article>
+                        <article>
+                            <input type="text" name="r_apellidos" placeholder="Apellidos">
+                        </article>
+                        <article>
+                            <input type="text" name="r_correo" placeholder="Correo Electrónico">
+                        </article>
+                        <article>
+                            <input type="submit" name="operacion" value="REGISTRARSE">
+                        </article>
+                    </form>
+                </div>
+                <div class="encabezado_caja_registro_division">
+                    <form id="sesion_desktop" action="/" method="post">
+                        <article>
+                            <h4>INICIAR SESIÓN</h4>
+                        </article>
+                        <article>
+                            <input type="text" name="l_n_usuario" placeholder="Nombre de usuario / Correo Electrónico">
+                        </article>
+                        <article>
+                            <input type="password" name="l_pwd" placeholder="Contraseña">
+                        </article>
+                        <article>
+                            <input type="submit" name="operacion" value="INICIAR SESIÓN">
+                        </article>
+                    </form>
+                </div>
+                <div class="encabezado_caja_registro_division">
+                    <p>¿Has olvidado la contraseña?</p>
+                    <form id="sesion_recuperacion" action="/" method="POST">
+                        <input type="text" name="c_recuperacion" placeholder="Correo de recuperación">
+                        <input type="submit" value="RECUPERAR CUENTA" name="operacion">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </header>
+
+   <!--Sección Localización-->
+   <section id="seccion_localizacion">
+    <div>
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3036.8459565191743!2d-3.629153884983685!3d40.43440977936312!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd422f6e4be61abd%3A0x674cc71908026b06!2sIFP!5e0!3m2!1ses!2ses!4v1583579177518!5m2!1ses!2ses"
+            width="600" height="450" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+    </div>
+    <div></div>
+    </section>
+
+    <!--Sección Contacto-->
+    <section id="seccion_contacto">
+        <div></div>
+        <div>
+            <article>
+                <img src="./img/logo.png" alt="">
+                <h3>Grupo Looklass</h3>
+            </article>
+            <article>
+                <i class="fas fa-2x fa-phone-square"></i>
+                <h3>+34 91 532 44 95</h3>
+            </article>
+            <article>
+                <i class="fas fa-2x fa-envelope-square"></i>
+                <h3>tucentroideal@looklass.es</h3>
+            </article>
+        </div>
+    </section>
+    <!--Pie de pagina-->
+    <footer id="pie_pagina">
+        <div class="pie_pagina_caja">
+            <article>
+                <a href="/informacion#terminos"><p>Términos y condiciones</p></a>
+            </article>
+            <article>
+                <p>&#8212;</p>
+            </article>
+            <article>
+                <a href="/informacion#faq"><p>F.A.Q</p></a>
+            </article>
+        </div>
+        <div class="pie_pagina_caja">
+            <article>
+                <p>© 2020</p>
+            </article>
+            <article>
+                <p>&#8212;</p>
+            </article>
+            <article>
+                <p>Grupo Looklass</p>
+            </article>
+        </div>
+        <div class="pie_pagina_caja">
+            <article>
+                <i class="fab fa-2x fa-facebook-square"></i>
+            </article>
+            <article>
+                <i class="fab fa-2x fa-twitter-square"></i>
+            </article>
+            <article>
+                <i class="fab fa-2x fa-instagram"></i>
+            </article>
+            <article>
+                <i class="fab fa-2x fa-linkedin"></i>
+            </article>
+        </div>
+    </footer>
 </body>
+<script src="./js/extensions.js"></script>
 </html>
