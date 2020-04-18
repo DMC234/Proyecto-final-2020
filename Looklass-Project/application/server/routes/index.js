@@ -2,9 +2,25 @@ const Express = require('express');
 const router = Express.Router();
 const usuarios = require('../models/usuarios');
 const centro = require('../models/centro');
+const interaccion = require('../models/interaccion');
+const db = require('../config/database');
+const Sequelize = require('sequelize');
 const nodemailer = require('nodemailer');
+const os = require('os');
 //Variable general del usuario
 var usuario;
+var centro_general;
+var nota_valoracion;
+var ip_ssoo = os.networkInterfaces();
+var usuario_ssoo = os.userInfo().username;
+var ip_usuario = new Map();
+
+//Obtenemos la dirección MAC de la tarjeta de red del usuario.
+Object.keys(ip_ssoo).forEach((claves)=>{
+    ip_ssoo['Wi-Fi'].map((address)=>{
+        ip_usuario.set('ipUsuario',address.mac);
+    });
+});
 
 //exportamos las rutas y así acceder a estas.
 module.exports = () => {
@@ -19,22 +35,82 @@ module.exports = () => {
     //RUTA BUSQUEDA
     router.get('/busqueda', (request, response) => {
         console.log(request.query);
-        if(request.query != {}){
-            //Dentro de este método se implementa el modelo de la tabla interacción y se crea la fila 
-            //con la Id del usuario y la id del centro.
-          response.redirect(request.query.r);
+        if(request.query.operacion == "visitar"){
+            console.log(request.query);
+            if(request.query.r != undefined){
+                async function contarVisita(enlacex){
+                    let interaccion_valor;
+                    let interaccion_fila;
+                    let estado;
+                    //Se busca si la visita del usuario ya ha sido contabilizada
+                    //Comprobamos la sesión del usuario
+                    centro_general = await centro.findOne({where:{enlace:enlacex}});
+                    if(usuario == null){
+                        let anonimo = await usuarios.findOne({where:{d_mac:ip_usuario.get('ipUsuario')}});
+                        if(anonimo == null){
+                            await usuarios.create({
+                                idUsuario:0,
+                                nombreUsuario:'anonimo',
+                                pwd:'000000',
+                                nombreReal:'anonimo',
+                                apellidoReal:'anonimo',
+                                correo:'anonimo',
+                                d_mac:ip_usuario.get('ipUsuario')
+                            });
+                            anonimo = await usuarios.findOne({where:{d_mac:ip_usuario.get('ipUsuario')}});
+                        }
+    
+                        interaccion_fila = await interaccion.findOne({where:{idUsuario:anonimo.idUsuario,numeroCentro:centro_general.numeroCentro}});
+                        estado = anonimo.idUsuario;
+                    }else{
+                        interaccion_fila = await interaccion.findOne({where:{idUsuario:usuario.idUsuario,numeroCentro:centro_general.numeroCentro}});
+                        estado = usuario.idUsuario;
+                    }
+    
+                    if(interaccion_fila != null){
+                        console.log('La visita ya cuenta');
+                    }else{
+                    //Dentro de este método se implementa el modelo de la tabla interacción y se crea la fila 
+                    //con la Id del usuario y la id del centro.
+                    interaccion_valor = await interaccion.create({
+                        idUsuario:estado,
+                        visita:1,
+                        valoracion:0,
+                        numeroCentro:centro_general.numeroCentro
+                        });
+                    }
+                }
+                //llamamos a la función asíncrona para contar la visita
+                contarVisita(request.query.r);
+    
+                //El servidor redirige al cliente a la página oficial del centro.
+                response.redirect(request.query.r);        
+            }
+                //Se limpia la redirección para así poder ser utilizada
+                request.query.r = undefined;
+        }else if(request.query.operacion == "salir_sesion"){
+            usuario = null;
+            response.redirect('/');
         }else{
-            response.render('busqueda',{
-                pagina:'Busqueda',
-                centros:null,
-                aviso:null,
-                usuario:null
-            });
+            if(usuario == null){
+                response.render('busqueda',{
+                    pagina:'Busqueda',
+                    centros:null,
+                    aviso:null,
+                    usuario:null
+                });
+            }else{
+                response.render('busqueda',{
+                    pagina:'Busqueda',
+                    centros:null,
+                    aviso:null,
+                    usuario:usuario
+                });
+            }
         }
     });
 
-
-
+    
 
     //RUTA DE INFORMACIÓN DE TÉRMINOS Y CONDICIONES
     router.get('/informacion',(request, response)=>{
@@ -88,7 +164,8 @@ module.exports = () => {
                 pwd: request.body.r_pwd,
                 nombreReal: request.body.r_n_personal,
                 apellidoReal: request.body.r_apellidos,
-                correo: request.body.r_correo
+                correo: request.body.r_correo,
+                d_mac:null
             })
                 .then((valor) => {
                     console.log('Usuario creado correctamente');
@@ -327,95 +404,211 @@ module.exports = () => {
 
     //Formulario de Búsqueda
     router.post('/busqueda',(request, response)=>{
-        //Valores Iniciales
+       if(request.body.operacion == "Valorar"){
+         console.log('Entrada a valorar');
+         console.log(request.body);
+         console.log(request.query);
+
+         async function valorarCentro(){
+            //Buscamos el centro clickeado y posteriormente con el numerocentro y la idUsuario de la sesión
+            //Buscamos la visita en la tabla interacción y modificiamos la valoración.
+            centro_general = await centro.findOne({where:{numeroCentro:request.query.idCentro}});
+            let fila_interaccion = await interaccion.findOne({where:{numeroCentro:centro_general.numeroCentro,idUsuario:usuario.idUsuario}});
+            fila_interaccion.valoracion = request.body.valorar_centro;
+            let consulta = await db.query(`UPDATE interaccion set valoracion = ${request.body.valorar_centro}
+            WHERE numeroCentro = ${fila_interaccion.numeroCentro} AND idUsuario = ${fila_interaccion.idUsuario}`);
+            //Redirigimos al usuario a la página de búsqueda.
+            response.render('busqueda',{
+                pagina:'Busqueda',
+                centros:null,
+                aviso:`Centro ${centro_general.nombreCentro} valorado en ${fila_interaccion.valoracion} estrellas`,
+                usuario:usuario
+            });
+        }  
+
+        valorarCentro();
+         
+         
+       }else if(request.body.operacion == "BUSCAR"){
+            //Valores Iniciales
         let campos = request.body;
-        let valoracion = campos.b_valoracion;
+        let valoracion = campos.b_valoracion != undefined;
         let localizacion = campos.b_localizacion != '';
         let tematica = campos.b_tematica != '';
-
-           
-
-        async function buscarCentros(){
+        
+        async function prepararBusqueda(){
             //Obtenemos los valores de los formularios con comparaciones para ahorrar código
             //a su vez también tenemos los arrays y el objeto para pasar a la función incluirResultados
             //y así obtener las filas correspondientes.
+            //Campos del formulario
             let campo_tematica = campos.b_tematica;
             let campo_localizacion = campos.b_localizacion;
+            let campo_valoracion = campos.b_valoracion;
+            //Matrices de almacenamiento
+            let comprobar_valoracion = new Set();
             let comprobar_valor = [0];
-            let resultados_comprobar = new Array();
+            let resultados_tematica = new Array();
+            let resultados_valoracion = new Array();
+            //Objeto y variables generales
             let objetoConsulta = {};
-            var centrox;
-            console.log(campo_tematica);
-            //Función asíncrona que contiene el algoritmo para obtener las filas de temáticas
-            //y asimismo el objeto que contiene los where para personalizar la consulta del buscador.
-            async function incluirResultado(objetox){
-            let filas_tematica = await centro.findAll();
-            for(let i = 0; i < filas_tematica.length; i++){
-                let valor = filas_tematica[i].tematica;
-                if(valor.includes('|')){
-                    for(let i = 0; i < valor.length; i++){
-                        if(valor.charAt(i) == '|'){
-                            comprobar_valor.push(i);
-                        }
-                    }
-                    for(let i = 0; i < comprobar_valor.length; i++){
-                        if(valor.includes(campo_tematica,comprobar_valor[i])){
-                            resultados_comprobar.push(valor);
-                        }
-                    }
-                }else{
-                    if(campo_tematica == valor){
-                        resultados_comprobar.push(valor);
-                        }
-                    }
-                }
-                //Realizamos la consulta con el array de los resultados
-                console.log('dentro de la función');
-                centrox = await centro.findAll({
-                    where:objetox  
-                });
-                //Comprobamos si hay resultados que responden a la consulta
-                if(centrox.length > 0){
-                    response.render('busqueda',{
-                        pagina:'Busqueda',
-                        centros:centrox,
-                        aviso:null,
-                        usuario:usuario
-                    });
-                }else{
-                    response.render('busqueda',{
-                        pagina:'Busqueda',
-                        centros:null,
-                        aviso:'NO HAY RESULTADOS',
-                        usuario:usuario
-                    })
-                }
-            }
+            let objetoRender = {};
+            var centrox,centrox_valoracion,centrox_visitas;
+            //Variables de uso
+            let centro_valoracion;
+            let centro_tematica;
+            var centros_valorados = [];
+            var centros_valoracion = [];
+            var centros_visita = [];
+            var consulta_valoracion;
+            
             //Comprobamos los campos rellenados
-            if(localizacion && tematica){
-                objetoConsulta.localizacion = campos.b_localizacion;
-                objetoConsulta.tematica = resultados_comprobar;
-                incluirResultado(objetoConsulta);
-            }else if(localizacion){
-                objetoConsulta.localizacion = campos.b_localizacion;
-                incluirResultado(objetoConsulta);
-            }else if(tematica){
-                objetoConsulta.tematica = resultados_comprobar;
-                incluirResultado(objetoConsulta);
+            if(valoracion && localizacion && tematica){
+                centro_valoracion = await buscarValoracion();
+                buscarTematica(centro_valoracion);
+                centrox = await centro.findAll({where:{localizacion:campo_localizacion,tematica:resultados_tematica}});
+                buscarRating(centrox);
+            }else if(valoracion && localizacion){
+                centro_valoracion = await buscarValoracion();
+                centrox = await centro.findAll({where:{localizacion:campo_localizacion,numeroCentro:resultados_valoracion}});
+                buscarRating(centrox);
+            }else if(valoracion && tematica){
+                centro_valoracion = await buscarValoracion();
+                buscarTematica(centro_valoracion);
+                centrox = await centro.findAll({where:{tematica:resultados_tematica}});
+                buscarRating(centrox);
+            }else if(localizacion && tematica){
+                centro_tematica = await centro.findAll();
+                buscarTematica(centro_tematica);
+                centrox = await centro.findAll({where:{localizacion:campo_localizacion,tematica:resultados_tematica}});
+                buscarRating(centrox);
+            }else if(valoracion){
+                centro_valoracion = await buscarValoracion();
+                console.log(centro_valoracion);
+                buscarRating(centro_valoracion);
+            }
+            else if(localizacion){
+                centrox = await centro.findAll({where:{localizacion:campo_localizacion}});
+                buscarRating(centrox);
+            }
+            else if(tematica){
+                centro_tematica = await centro.findAll();
+                buscarTematica(centro_tematica);
+                centrox = await centro.findAll({where:{tematica:resultados_tematica}});
+                buscarRating(centrox);
             }else{
+                //Si el usuario no envía información.
+                //Se reenvía a la misma página con un aviso.
                 response.render('busqueda',{
                     pagina:'Busqueda',
                     centros:null,
                     aviso:'NO HAY RESULTADOS',
-                    usuario:usuario
-                })
+                    usuario:usuario,
+
+                });
+            }
+
+            async function buscarCentro(objetoRender){
+                console.log('Buscando el centro');
+                console.log(objetoRender);
+                //Comprobamos si hay resultados que responden a la consulta
+                if(objetoRender.centros.length > 0){
+                    response.render('busqueda',objetoRender);
+                }else{
+                    response.render('busqueda',{
+                    pagina:'Busqueda',
+                    centros:null,
+                    aviso:'NO HAY RESULTADOS',
+                    usuario:usuario,
+                    valoracion:null,
+                    visitas:null
+                    });
+                }
+            }
+
+            async function buscarRating(fila_resultados){
+                if(fila_resultados.length > 0){
+                    for(let i = 0; i < fila_resultados.length; i++){
+                        centrox_visitas = await interaccion.findOne({where:{numeroCentro:fila_resultados[i].numeroCentro}});
+    
+                        if(centrox_visitas == null){
+                            //Si el centro no se ha visitado por nadie y no hay valoración,
+                            //Simplemente se rellena las matrices a mostrar por 0.
+                            console.log('No ha visitado el centro');
+                            console.log(fila_resultados[i].numeroCentro);
+                            centros_valorados.push(0);
+
+                        }else{
+                            console.log('Ha visitado el centro');
+                            console.log(fila_resultados[i].numeroCentro);
+                            centros_valorados.push(centrox_visitas.numeroCentro);
+                        }    
+                    }
+
+                    console.log(centros_valorados);
+                    //Importante, a la hora de obtener el resultado de una db.query(), es importante indicar el tipo.
+                    //en los select hay que colocar, type:{Sequelize.QueryTypes.SELECT}
+                    for(let j = 0; j < centros_valorados.length; j++){
+                        consulta_valoracion = await db.query(`SELECT SUM(visita) as n_visitas, valoracion as n_estrellas FROM interaccion WHERE numeroCentro = ${centros_valorados[j]}`,
+                        {type:Sequelize.QueryTypes.SELECT})
+                        consulta_valoracion.forEach(valor=>console.log(valor));
+                        if(consulta_valoracion[0].n_visitas == null && consulta_valoracion[0].n_estrellas == null){
+                            console.log('Centro no visitado');
+                            centros_visita.push(0);
+                            centros_valoracion.push(0);
+                        }else{
+                            console.log('Centro visitado');
+                            centros_visita.push(consulta_valoracion[0].n_visitas);
+                            centros_valoracion.push(consulta_valoracion[0].n_estrellas);
+                        }
+                    }
+                }
+                
+                objetoRender.pagina = 'Busqueda';
+                objetoRender.centros = fila_resultados;
+                objetoRender.aviso = null;
+                objetoRender.usuario = usuario;
+                objetoRender.valoracion = centros_valoracion;
+                objetoRender.visitas = centros_visita;
+                buscarCentro(objetoRender);
+            }
+
+            async function buscarValoracion(){
+                let fila_valoracion = await interaccion.findAll({where:{valoracion:campo_valoracion}});
+                //Almacenamos el número del centro
+                fila_valoracion.forEach((valor)=>{comprobar_valoracion.add(valor.numeroCentro)});
+                for(let i of comprobar_valoracion.values()){resultados_valoracion.push(i)};
+                let fila_centro = await centro.findAll({where:{numeroCentro:resultados_valoracion}});
+                return fila_centro;
+            }
+
+            //Función asíncrona que contiene el algoritmo para obtener las filas de temáticas
+            //y asimismo el objeto que contiene los where para personalizar la consulta del buscador.
+            async function buscarTematica(filas_buscadas){
+                for(let i = 0; i < filas_buscadas.length; i++){
+                    let valor = filas_buscadas[i].tematica;
+                    if(valor.includes('|')){
+                        for(let i = 0; i < valor.length; i++){
+                            if(valor.charAt(i) == '|'){
+                                comprobar_valor.push(i);
+                            }
+                        }
+                        for(let i = 0; i < comprobar_valor.length; i++){
+                            if(valor.includes(campo_tematica,comprobar_valor[i])){
+                                resultados_tematica.push(valor);
+                            }
+                        }
+                    }else{
+                        if(campo_tematica == valor){
+                            resultados_tematica.push(valor);
+                        }
+                    }
+                }
             }
         }   
         //Llamamos a la función asíncrona para buscar los centros
-        buscarCentros();
-
+        prepararBusqueda();
+       }
     });
-
 
     return router;
 }

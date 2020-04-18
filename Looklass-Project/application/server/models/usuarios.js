@@ -29,6 +29,9 @@ const usuario = db.define('usuarios',{
     correo:{
         type:Sequelize.STRING,
         notNull:true
+    },
+    d_mac:{
+        type:Sequelize.STRING
     }
 
 });

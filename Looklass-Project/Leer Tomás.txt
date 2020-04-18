@@ -1,0 +1,10 @@
+Antes de arrancar la aplicación, ejecutar Script SQL que se encuentra en la carpeta "Script SQL".
+
+Posteriormente en un terminal y con la ruta seleccionada hasta la carpeta "application", ejecutar
+el comando:
+
+"npm run start"
+
+Con esto se ejecutará la aplicación.
+
+Atentamente: Eduardo deL Río Rodríguez 2ºDAW - Miembro de Looklass: Back-End, BBDD, JS.

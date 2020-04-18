@@ -14,6 +14,11 @@ const cuerpo = document.querySelectorAll('.cuerpo');
 const valoracion = document.querySelectorAll('.fa-star');
 const error_busqueda = document.querySelector('.error_busqueda');
 const seccion_busqueda = document.getElementById('seccion_busqueda');
+const capa_valoracion = document.querySelectorAll('#valorar_centro');
+const capa_valoracion_checkbox = document.querySelectorAll('.valorar_centro_checkbox');
+const sesion_usuario = document.querySelector('#sesion_busqueda');
+console.log(capa_valoracion);
+console.log('HOLA!');
 
 //Clase donde se encuentran posibles estructuras para cargar en el HTML.
 class builder {
@@ -45,12 +50,37 @@ class builder {
         let campo = document.getElementById(`star_${posicion+1}`);
         campo.checked = true;
     }
+
+    actualizarValoracion(posicion){
+        let campo = capa_valoracion_checkbox[posicion].firstElementChild;
+        campo.checked = true;
+        //Recorremos las capas de los emojis para comprobar la capa cambiada y así diferenciarlo
+        //cambiando el color.
+        for(let i = 0; i < capa_valoracion_checkbox.length; i++){
+            if(capa_valoracion_checkbox[i].firstElementChild.checked == true){
+                capa_valoracion_checkbox[i].style.backgroundColor = "rgba(47, 161, 131, 0.9)";
+                capa_valoracion_checkbox[i].style.color = "rgba(72, 219, 251,0.9)";
+            }else{
+                capa_valoracion_checkbox[i].style.backgroundColor = "transparent";
+                capa_valoracion_checkbox[i].style.color = "white";
+            }
+        }
+
+    }
     //Aumentar capa de la capa de los resultados por estética
     mostrarResultadosBusqueda(){
         if(error_busqueda.firstElementChild.textContent == ''){
             seccion_busqueda.style.height = '0vh';
         }else{
             seccion_busqueda.style.height = '40vh';
+        }
+    }
+    //Aumentar y reducir altura de la capa de valoración del centro
+    mostrarCampoValoracion(posicion){
+        if(sesion_usuario == null){
+            capa_valoracion[posicion].style.height = '0vh';
+        }else{
+            capa_valoracion[posicion].style.height = '10vh';
         }
     }
 }
@@ -69,9 +99,25 @@ for(let i = 0; i < valoracion.length; i++){
 //Se aumenta la capa de resultados de la página busqueda.html al cargar la misma, comprobando
 //si está vacío la capa donde se muestran los resultados y el error mismamente, de esta manera
 //ahorramos codigo CSS y queda más estético.
-document.addEventListener('DOMContentLoaded',()=>clase.mostrarResultadosBusqueda());
+document.addEventListener('DOMContentLoaded', ()=>{
+    clase.mostrarResultadosBusqueda();
+});
+
+
+//Mostramos u ocultamos la capa de valoración en la ficha de búsqueda
+for(let i = 0; i < capa_valoracion.length; i++){
+    clase.mostrarCampoValoracion(i);
+}
+
+//Recorremos los emojis del formulario de valoración de la búsqueda
+for(let i = 0; i < capa_valoracion_checkbox.length; i++){
+    capa_valoracion_checkbox[i].addEventListener('click',()=>clase.actualizarValoracion(i));
+}
 
 //Accedemos a los botones de registro y cierre del formulario del index.
 encabezado_caja[2].firstElementChild.addEventListener('click', ()=>clase.Formulario(1));
 cerrar_formulario.addEventListener('click',()=>clase.Formulario(2));
 formulario_recuperacion_enlace.addEventListener('click',()=>clase.Formulario(3));
+
+
+
