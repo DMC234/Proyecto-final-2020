@@ -8,7 +8,7 @@ const capa_valoracion = document.querySelectorAll('#valorar_centro');
 const capa_valoracion_checkbox = document.querySelectorAll('.valorar_centro_checkbox');
 
 const formulario_iniciar_sesion = document.querySelector('#encabezado_caja_iniciar_sesion');
-const recuperar_contraseña = document.querySelector('#busqueda_sesion_recuperacion');
+const recuperar_contraseña = document.querySelector('#busqueda_recuperacion');
 const busqueda_cerrar_formulario = document.querySelector('#busqueda_cerrar_formulario');
 const busqueda_abrir_formulario = document.querySelector('#busqueda_abrir_sesion');
 

@@ -75,6 +75,7 @@
     #encabezado_caja_iniciar_sesion{  
         width: 100%;
         z-index: 1;
+        right: 0;
     }
 
     #busqueda_iniciar_sesion>article>div:first-child, #busqueda_iniciar_sesion>article>div:last-child,#encabezado_caja_iniciar_sesion>article>div{
@@ -86,15 +87,15 @@
     }
  
     /*Formulario de recuperación de contraseña de búsqueda*/
-    #busqueda_sesion_recuperacion{
+    #busqueda_recuperacion{
         transition: 0.5s;
         height: 0vh;
         overflow: hidden;
     }
  
-    #busqueda_sesion_recuperacion>input[type="text"], #busqueda_sesion_recuperacion>input[type="submit"]{
+    #busqueda_recuperacion>input[type="email"], #busqueda_recuperacion>input[type="submit"]{
         margin-top:1%;
-        font-size: 2.5vw;
+        font-size: 1.95vw;
     }
 
     /*Sección Tendencia*/
@@ -266,6 +267,38 @@
         /*4º FILA*/
     .encabezado_caja:nth-child(4)>input[type="submit"] {
         font-size: 3vw;
+    }
+
+    /*Formulario de inicio de sesión*/
+    #encabezado_caja_iniciar_sesion{  
+        width: 100%;
+        z-index: 1;
+        right: 0;
+        height: 80vh;
+    }
+        /*Tamaño de cada fila del formulario*/
+    #busqueda_iniciar_sesion>article{
+        height: 16vh;
+     }
+
+    #busqueda_iniciar_sesion>article>div:first-child, #busqueda_iniciar_sesion>article>div:last-child,#encabezado_caja_iniciar_sesion>article>div{
+        font-size: 2vw;
+    }
+ 
+    #busqueda_iniciar_sesion>article>input[type="text"], #busqueda_iniciar_sesion>article>input[type="password"],#busqueda_iniciar_sesion>article>input[type="submit"]{
+        font-size: 2.5vw;
+    }
+ 
+    /*Formulario de recuperación de contraseña de búsqueda*/
+    #busqueda_recuperacion{
+        transition: 0.5s;
+        height: 0vh;
+        overflow: hidden;
+    }
+ 
+    #busqueda_recuperacion>input[type="email"], #busqueda_recuperacion>input[type="submit"]{
+        margin-top:1%;
+        font-size: 1.6vw;
     }
 
     /*Sección Tendencia*/
