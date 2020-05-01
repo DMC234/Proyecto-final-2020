@@ -14,53 +14,6 @@ html{
     -ms-overflow-style: none;
 }
 
-/*Efectos Externos*/
-.lds-dual-ring {
-    display: inline-block;
-    width: 80px;
-    height: 80px;
-    position: relative;
-  }
-  .lds-dual-ring:before, .lds-dual-ring:after{
-    content: " ";
-    display: block;
-    width: 128px;
-    height: 128px;
-    border-radius: 50%;
-    border: 6px solid #fff;
-    border-color: rgba(8, 8, 122, 1.0) transparent rgba(8, 8, 122, 1.0) transparent;
-    animation: lds-dual-ring-right 1.2s linear infinite;
-  }
-
-  .lds-dual-ring:before{
-      position: absolute;
-      border-color: rgba(47, 161, 131, 0.8) transparent  rgba(47, 161, 131, 0.8) transparent ;
-      top: 20px;
-      left: 20px;
-      width: 84px;
-      height: 84px;
-      animation: lds-dual-ring-left 1.2s linear infinite;
-  }
-  @keyframes lds-dual-ring-right {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
-  }
-
-  @keyframes lds-dual-ring-left {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(-360deg);
-    }
-  }
-  
-
-
 /*Encabezado*/
 #encabezado{
     width: 100%;
@@ -86,6 +39,7 @@ html{
     /*1ºFILA*/
 .encabezado_caja:first-child{
     height: 25vh;
+    position: relative;
 }
 .encabezado_caja:first-child>div{
     width: 33%;
@@ -95,16 +49,37 @@ html{
     align-items: center;
     font-weight: bolder;
     font-size: 1.3vw;
-    letter-spacing: 0.5vw;
+    letter-spacing: 0.3vw;
 }
 
+.encabezado_caja:first-child>div>a{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 25vh;
+}
+/*Si ha iniciado sesión*/
+.encabezado_caja:first-child>div>a>img{
+    float: left;
+    width: 25.5%;
+}
+/*Si no ha iniciado sesión*/
 .encabezado_caja:first-child>div>img{
     float: left;
     width: 25.5%;
 }
 
+.encabezado_caja:first-child>div:last-child{
+    color: white;
+    cursor: pointer;
+}
+.encabezado_caja_nosesion{
+    cursor: default !important;
+}
     /*2º FILA*/
 .encabezado_caja:nth-child(2){
+    position: relative;
     height: 20vh;
     flex-direction: column;
     justify-content: space-between;
@@ -169,17 +144,18 @@ html{
 .form_caja>div>article>i{
     transition: 0.5s;
     font-size: 2vw;
+    /*Compatibilidad para Google Chrome y Opera*/
+    -webkit-background-image: radial-gradient(rgba(72, 219, 251,1.0), rgba(47, 161, 131, 1.0));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    /*Compatibilidad para Mozilla y otros navegadores*/
     background-image: radial-gradient(rgba(72, 219, 251,1.0), rgba(47, 161, 131, 1.0));
     background-clip: text;
     -webkit-text-fill-color: transparent;
+    cursor: pointer;
 }
 
-.form_caja>div>article>i:hover{
-    transition: 0.5s;
-    background-image: radial-gradient(rgba(72, 219, 251,1.0), rgba(133, 181, 204, 1.0));
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
+
 /*4º FILA*/
 .encabezado_caja:nth-child(4){
     height: 20vh;
@@ -200,19 +176,138 @@ html{
     cursor: pointer;
 }
 
-.encabezado_caja:nth-child(4)>input[type="submit"]:hover{
-   transition: 0.5s;
-   letter-spacing: 0.6vw;
-   background-color: rgba(47, 161, 131, 0.5);
+/*CAPA PARA EL FORMULARIO DE INICIO DE SESIÓN.*/
+#encabezado_caja_iniciar_sesion,#busqueda_iniciar_sesion, #busqueda_iniciar_sesion>article, #busqueda_iniciar_sesion>article>div{  
+   display: flex;
 }
 
+#encabezado_caja_iniciar_sesion{
+   position: absolute;
+   top: -25%;
+   right: 1%;
+   width: 50%;
+   height: 71vh;
+   border: outset 1px silver;
+   background: rgba(0, 0, 0, 0.95);
+   flex-direction: column;
+   display: none;
+}
+    /*Formulario Busqueda-Inicio Sesión*/
+#busqueda_iniciar_sesion{
+    width: 100%;
+    height: auto;
+    flex-direction: column;
+}
+
+#busqueda_iniciar_sesion>article{
+    width: 100%;
+    height: 14vh;
+    border: outset 1px silver;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5vw;
+ }
+
+ #busqueda_iniciar_sesion>article>div:first-child{
+    width: 85%;
+    height: 14vh;
+    font-size: 1.3vw;
+    justify-content: center;
+    align-items: center;
+ }
+
+ #busqueda_iniciar_sesion>article>div:last-child{
+    width: 15%;
+    height: 14vh;
+    font-size: 1.5vw;
+    border: outset 1px silver;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.5s;
+ }
+
+
+
+ #busqueda_iniciar_sesion>article>input[type="text"], #busqueda_iniciar_sesion>article>input[type="password"]{
+    width: 60%;
+    padding: 1%;
+    text-align: center;
+    background-color: grey;
+    color: white;
+    border-radius: 10px;
+    font-size: 1.5vw;
+ }
+
+ #busqueda_iniciar_sesion>article>input[type="submit"]{
+    width: 40%;
+    padding: 1%;
+    text-align: center;
+    background-color: rgba(72, 219, 251,0.3);
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1.5vw;
+    transition: 0.5s;
+ }
+
+    /*Formulario de recuperación de contraseña de búsqueda*/
+#encabezado_caja_iniciar_sesion>article{
+    width: 100%;
+    height: 14vh;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    font-size: 1.3vw;
+}
+
+#encabezado_caja_iniciar_sesion>article>div{
+    display: flex;
+    border: outset 1px silver;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    width: 50%;
+    height: 14vh;
+    font-size: 1.3vw;
+}
+
+#busqueda_sesion_recuperacion{
+    transition: 0.5s;
+    height: 0vh;
+    overflow: hidden;
+}
+
+#busqueda_sesion_recuperacion>input[type="email"]{
+    padding: 1% 0%;
+    font-size: 1vw;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.8);
+    text-align: center;
+    color: white;
+    font-weight: bold;
+}
+
+#busqueda_sesion_recuperacion>input[type="submit"]{
+    padding: 1% 0%;
+    font-size: 0.9vw;
+    border-radius: 5px;
+    background-color: grey;
+    color: white;
+    font-weight: bold;
+    transition: 0.5s;
+    cursor: pointer;
+}
 
 /*SECCIÓN TENDENCIAS*/
+#seccion_tendencia, #seccion_tendencia>div, .seccion_tendencia_caja>a, .seccion_tendencia_caja>a>article{
+    display: flex;
+}
 #seccion_tendencia{
     width: 100%;
     height:45vh;
     background-image: radial-gradient(rgba(72, 219, 251,0.5), rgba(47, 161, 131, 0.8));
-    display: flex;
     flex-direction: column;
 }
 
@@ -221,7 +316,6 @@ html{
     padding: 1% 0%;
     letter-spacing: 0.5vw;
     color: whitesmoke;
-    display: flex;
     justify-content: center;
     align-items: center;
 }
@@ -234,7 +328,6 @@ html{
     /*Tendencias*/
 #seccion_tendencia>div:last-child{
     height: 30vh;
-    display: flex;
     justify-content: space-between;
 }
 
@@ -245,58 +338,28 @@ html{
 }
 
 .seccion_tendencia_caja>article{
-    width: 99.9%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.seccion_tendencia_caja>article:first-child{
+    width: 100%;
+    height: 20vh;
     background-size: cover;
     background-attachment: fixed;
-    height: 20vh;
 }
 
-.seccion_tendencia_caja>article:last-child{
+.seccion_tendencia_caja>a{
+    width: 100%;
     height: 10vh;
     transition: 0.5s;
     font-size: 1.3vw;
     background-color: rgba(0, 0, 0, 0.2);
     position: relative;
-    cursor: pointer;
 }
 
-.seccion_tendencia_caja>article:last-child::before, .seccion_tendencia_caja>article:last-child::after{
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
+.seccion_tendencia_caja>a>article{
     width: 100%;
-    height: 100%;
-    box-sizing: border-box;
-    transform: scale(0);
-    transition: 0.5s;
+    height: auto;
+    justify-content: center;
+    align-items: center;
 }
 
-.seccion_tendencia_caja>article:last-child::before{
-    border-bottom: solid 2px rgba(133, 181, 204, 1.0);
-    border-left: solid 2px rgba(133, 181, 204, 1.0);
-    transform-origin: 0 100%;
-}
-
-.seccion_tendencia_caja>article:last-child::after{
-    border-top: solid 2px rgba(133, 181, 204, 1.0);
-    border-right: solid 2px rgba(133, 181, 204, 1.0);
-    transform-origin: 100% 0;
-}
-
-.seccion_tendencia_caja>article:last-child:hover::before, .seccion_tendencia_caja>article:last-child:hover::after{
-    transform:scale(1);
-}
-.seccion_tendencia_caja>article:last-child:hover{
-    transition: 0.5s;
-    background-color: rgba(0, 0, 0, 0.4);
-}
     /*Imágenes de cada capa de tendencia de cada carta.*/
 .seccion_tendencia_caja:first-child>article:first-child{
     background-image: url("/IMG/trends/1.jpg");
@@ -428,20 +491,11 @@ html{
     font-weight: bold;
     transition: 0.5s;
     border: none;
-    background-color: transparent;
+    background-color: transparent; 
     color: white;
     cursor: pointer;
 }
-.seccion_busqueda_caja:nth-child(6)>article:hover, .seccion_busqueda_caja:nth-child(6)>a:hover{
-    transition: 0.5s;
-    background-color: rgba(72, 219, 251,0.5);
-    letter-spacing: 0.5vw;
-}
-.seccion_busqueda_caja:nth-child(6)>article>input:hover{
-    transition: 0.5s;
-    background-color: rgba(72, 219, 251,0.5);
-    letter-spacing: 0.5vw;
-}
+
 /*4º capa*/
     /*Texto descriptivo del centro*/
 .seccion_busqueda_caja:nth-child(4){
@@ -475,12 +529,6 @@ html{
     transition: 0.5s;
 }
 
-#valorar_centro>div:hover{
-    transition: 0.5s;
-    background-color: rgba(47, 161, 131, 0.9);
-    color: rgba(72, 219, 251,0.9);
-}
-
 #valorar_centro>div>i{
    font-size: 2.5vw;
 }
@@ -505,6 +553,10 @@ html{
     text-align: center;
     color: white;
     letter-spacing: 0.5vw;
+    /*Compatibilidad para Chrome y Opera*/
+    -webkit-background-image: linear-gradient(to bottom left,rgba(47, 161, 131, 1.0), rgba(72, 219, 251,1.0),white);
+    -webkit-background-clip: text;
+    /*Compatibilidad para Mozilla y Otros navegadores*/
     background-image: linear-gradient(to bottom left,rgba(47, 161, 131, 1.0), rgba(72, 219, 251,1.0),white);
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -616,41 +668,6 @@ html{
     cursor: pointer;
 }
    
-.enlace_becas::before, .enlace_becas::after{
-    content: "";
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    box-sizing: border-box;
-    transform: scale(0);
-    transition: 0.5s;
-}
-
-.enlace_becas::before{
-    border-top: inset 1px silver;
-    border-right: inset 1px silver;
-    transform-origin: 100% 0%;
-    border-radius: 10px;
-}
-
-.enlace_becas::after{
-    border-bottom: inset 1px silver;
-    border-left: inset 1px silver;
-    transform-origin: 0 100%;
-    border-radius: 10px;
-}
-
-.enlace_becas:hover::after,.enlace_becas:hover::before{
-    transform: scale(1);
-}
-
-
-.enlace_becas:hover{
-   transition: 0.5s;
-   background-color: rgba(0, 0, 0, 0.4);
-}
 /*pie de pagina*/
 #pie_pagina{
     width: 100%;

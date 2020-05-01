@@ -1,0 +1,119 @@
+/*Encabezado*/
+
+    /*3º Fila - Busqueda por valoración*/
+.form_caja>div>article>i:hover{
+    transition: 0.5s;
+    background-image: radial-gradient(rgba(72, 219, 251,1.0), rgba(133, 181, 204, 1.0));
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+    /*4º Fila - Botón de buscar*/
+.encabezado_caja:nth-child(4)>input[type="submit"]:hover{
+    transition: 0.5s;
+    letter-spacing: 0.6vw;
+    background-color: rgba(47, 161, 131, 0.5);
+}
+    /*Formulario de inicio de sesión - botón de recuperación*/
+#busqueda_iniciar_sesion>article>div:last-child:hover{
+    transition: 0.5s;
+    background-color: rgba(133, 181, 204, 0.98);
+}
+    /*Formulario de inicio de sesión - Botón de iniciar sesión*/
+#busqueda_iniciar_sesion>article>input[type="submit"]:hover{
+    transition: 0.5s;
+    background-color: rgba(72, 219, 251,0.5);
+    letter-spacing: 0.2vw;
+}
+
+#busqueda_sesion_recuperacion>input[type="submit"]:hover{
+    transition: 0.5s;
+    background-color: rgba(29, 209, 161,0.6);
+}
+     
+/*Sección Tendencias*/
+.seccion_tendencia_caja>a::before, .seccion_tendencia_caja>a::after{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    transform: scale(0);
+    transition: 0.5s;
+}
+
+.seccion_tendencia_caja>a::before{
+    border-bottom: solid 2px rgba(133, 181, 204, 1.0);
+    border-left: solid 2px rgba(133, 181, 204, 1.0);
+    transform-origin: 0 100%;
+}
+
+.seccion_tendencia_caja>a::after{
+    border-top: solid 2px rgba(133, 181, 204, 1.0);
+    border-right: solid 2px rgba(133, 181, 204, 1.0);
+    transform-origin: 100% 0;
+}
+
+.seccion_tendencia_caja>a:hover::before, .seccion_tendencia_caja>a:hover::after{
+    transform:scale(1);
+}
+.seccion_tendencia_caja>a:hover{
+    transition: 0.5s;
+    background-color: rgba(0, 0, 0, 0.4);
+} 
+
+/*Sección Búsqueda*/
+    /*5º CAPA*/
+#valorar_centro>div:hover{
+    transition: 0.5s;
+    background-color: rgba(47, 161, 131, 0.9);
+    color: rgba(72, 219, 251,0.9);
+}
+    /*6º CAPA*/
+.seccion_busqueda_caja:nth-child(6)>article:hover, .seccion_busqueda_caja:nth-child(6)>a:hover{
+    transition: 0.5s;
+    background-color: rgba(72, 219, 251,0.5);
+    letter-spacing: 0.5vw;
+}
+.seccion_busqueda_caja:nth-child(6)>article>input:hover{
+    transition: 0.5s;
+    letter-spacing: 0.5vw;
+}
+
+/*Sección Becas*/
+.enlace_becas::before, .enlace_becas::after{
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+    transform: scale(0);
+    transition: 0.5s;
+}
+
+.enlace_becas::before{
+    border-top: inset 1px silver;
+    border-right: inset 1px silver;
+    transform-origin: 100% 0%;
+    border-radius: 10px;
+}
+
+.enlace_becas::after{
+    border-bottom: inset 1px silver;
+    border-left: inset 1px silver;
+    transform-origin: 0 100%;
+    border-radius: 10px;
+}
+
+.enlace_becas:hover::after,.enlace_becas:hover::before{
+    transform: scale(1);
+}
+
+.enlace_becas:hover{
+    transition: 0.5s;
+    background-color: rgba(0, 0, 0, 0.4);
+ }

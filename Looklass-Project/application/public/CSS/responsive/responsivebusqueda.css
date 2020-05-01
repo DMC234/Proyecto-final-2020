@@ -22,14 +22,25 @@
     .encabezado_caja:first-child>div {
         font-size: 3vw;
     }
-    .encabezado_caja:first-child>div>img {
+
+    #sesion_busqueda{
+        font-size: 2.53vw;
+    }
+    /*Si no ha iniciado sesión*/
+    .encabezado_caja:first-child>div>a>img{
         float: left;
         width: 50%;
     }
+    /*Si ha iniciado sesión*/
+    .encabezado_caja:first-child>div>img{
+        float: left;
+        width: 50%;
+    }
+
     /*2º FILA*/
     .encabezado_caja:nth-child(2) {
         height: 10vh;
-        font-size: 3vw;
+        font-size: 3.5vw;
     }
     /*3º FILA*/
     .encabezado_caja:nth-child(3) {
@@ -49,6 +60,7 @@
     .form_caja>div>article>i {
         font-size: 4.5vw;
     }
+
     /*4º FILA*/
     .encabezado_caja:nth-child(4) {
         height: 20vh;
@@ -58,6 +70,33 @@
         height: 5vh;
         font-size: 5vw;
     }
+
+    /*Formulario de inicio de sesión*/
+    #encabezado_caja_iniciar_sesion{  
+        width: 100%;
+        z-index: 1;
+    }
+
+    #busqueda_iniciar_sesion>article>div:first-child, #busqueda_iniciar_sesion>article>div:last-child,#encabezado_caja_iniciar_sesion>article>div{
+        font-size: 3vw;
+    }
+ 
+    #busqueda_iniciar_sesion>article>input[type="text"], #busqueda_iniciar_sesion>article>input[type="password"],#busqueda_iniciar_sesion>article>input[type="submit"]{
+        font-size: 4vw;
+    }
+ 
+    /*Formulario de recuperación de contraseña de búsqueda*/
+    #busqueda_sesion_recuperacion{
+        transition: 0.5s;
+        height: 0vh;
+        overflow: hidden;
+    }
+ 
+    #busqueda_sesion_recuperacion>input[type="text"], #busqueda_sesion_recuperacion>input[type="submit"]{
+        margin-top:1%;
+        font-size: 2.5vw;
+    }
+
     /*Sección Tendencia*/
     #seccion_tendencia {
         height: 25vh;
@@ -70,20 +109,27 @@
         height: 15vh;
         border: inset 1px rgba(133, 181, 204, 1.0);
     }
+
     .seccion_tendencia_caja>article:first-child {
         height: 10vh;
     }
-    .seccion_tendencia_caja>article:last-child {
+    .seccion_tendencia_caja>a{
+        height: 5vh;
+        font-size: 3vw;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .seccion_tendencia_caja>a>article{
         height: 5vh;
         font-size: 3vw;
     }
+
     /*Sección Búsqueda*/
-    #seccion_busqueda {
+    #seccion_busqueda, .seccion_busqueda_resultado {
         height: 30vh;
     }
-    .seccion_busqueda_resultado {
-        height: 30vh;
-    }
+    
     /*1º capa*/
         /*Imagen*/
     .seccion_busqueda_caja:first-child>article:first-child {
@@ -104,15 +150,42 @@
     .seccion_busqueda_caja:nth-child(2)>article {
         font-size: 3vw;
     }
-    /*3º y 5º capa*/
-    .seccion_busqueda_caja:nth-child(3)>article, .seccion_busqueda_caja:nth-child(5)>article, .seccion_busqueda_caja:nth-child(5)>a {
-        font-size: 3vw;
+    /*3º y 6º capa*/
+    .seccion_busqueda_caja:nth-child(3)>article, .seccion_busqueda_caja:nth-child(6)>a {
+        font-size: 2vw;
     }
     /*4º capa*/
         /*Texto descriptivo del centro*/
     .seccion_busqueda_caja:nth-child(4) {
         font-size: 2.4vw;
     }
+
+    /*5º Capa - Valorar Centro*/
+    #valorar_centro>div>i{
+     font-size: 4vw;
+    }
+
+    /*6º Capa*/
+    .seccion_busqueda_caja:nth-child(6)>article>input{
+        font-size: 2.5vw;
+    }
+
+    /*SI NO HAY RESULTADOS O NO SE HA INTRODUCIDO VALORES*/
+    .error_busqueda{
+        width: 90%;
+        height: 40vh;
+        margin: 0% 4%;
+        border: inset 1px silver;
+        border-radius: 10px;
+        background-color: rgba(0, 0, 0, 0.7);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .error_busqueda>h3{
+        font-size: 4vw;
+    }
+
     /*Sección Becas*/
     #becas {
         height: 86vh;
@@ -194,6 +267,7 @@
     .encabezado_caja:nth-child(4)>input[type="submit"] {
         font-size: 3vw;
     }
+
     /*Sección Tendencia*/
     #seccion_tendencia>div:first-child {
         font-size: 2vw;
@@ -219,14 +293,23 @@
     .seccion_busqueda_caja:nth-child(2)>article {
         font-size: 2vw;
     }
-    /*3º y 5º capa*/
-    .seccion_busqueda_caja:nth-child(3)>article, .seccion_busqueda_caja:nth-child(5)>article, .seccion_busqueda_caja:nth-child(5)>a {
+    /*3º y 6º capa*/
+    .seccion_busqueda_caja:nth-child(3)>article, .seccion_busqueda_caja:nth-child(6)>article, .seccion_busqueda_caja:nth-child(6)>a {
         font-size: 2vw;
     }
     /*4º capa*/
         /*Texto descriptivo del centro*/
     .seccion_busqueda_caja:nth-child(4) {
         font-size: 1.4vw;
+    }
+    /*5º capa*/
+    #valorar_centro>div>i{
+        font-size: 3vw;
+    }
+
+    /*6º Capa*/
+    .seccion_busqueda_caja:nth-child(6)>article>input{
+        font-size: 2.5vw;
     }
     /*Sección Becas*/
 

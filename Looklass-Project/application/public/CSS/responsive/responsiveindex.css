@@ -33,18 +33,44 @@
         height: 25vh;
     }
     .encabezado_caja_logo>div:nth-child(2)>h2 {
-        font-size: 4vw;
+        font-size: 3.3vw;
     }
     .encabezado_caja_logo>div:nth-child(2)>a {
         font-size: 4vw;
     }
-    /*Formulario de Registro y Login y Recuperación*/
-    .encabezado_caja_registro {
-        width: 100%;
+
+    /*FORMULARIO DE REGISTRO E INICIO DE SESIÓN INDEX*/
+    #index_formulario{
+        width: 99%;
+        height: 85vh;
+    }
+        /*Divisiones de cajas del formulario*/
+        /*1º Fila - Titulo y boton de cerrar*/
+    .index_formulario_caja:first-child>div{
+        font-size: 3vw !important;
+    }
+        /*2º Fila - Formulario de Registro e Inicio de sesión*/
+
+    .index_formulario_fila>input{
+        border-radius: 5px !important;
+        width: 95% !important;
+        padding: 2% 0%;
+        font-size: 3vw;
+    }
+        /*3º Fila - Formulario de recuperación de contraseña*/
+    .index_formulario_caja:last-child{
+        font-size: 3vw;
     }
 
-    .encabezado_caja_registro_division:nth-child(4)>p{
-        font-size: 4vw;
+    /*Sección de error de recuperación de correo*/
+    /*Sección Mensaje de Error*/
+
+    #seccion_busqueda_error{
+        height: 10vh;
+    }
+
+    #seccion_busqueda_error>div>h3{
+        font-size: 2.5vw;
     }
 
     /*Sección Localización y Sección Contacto*/
@@ -98,22 +124,35 @@
 
     /*Boton de búsqueda y eslogan*/
     .encabezado_caja_logo>div:nth-child(2)>h2 {
+        font-size: 2.3vw;
+    }
+
+    /*FORMULARIO DE REGISTRO E INICIO DE SESIÓN INDEX*/
+    #index_formulario{
+        width: 99%;
+        height: 90vh;
+    }
+
+    /*Divisiones de cajas del formulario*/
+
+     /*1º Fila - Titulo y boton de cerrar*/
+     .index_formulario_caja:first-child>div{
+        font-size: 2.5vw !important;
+    }
+
+    /*2º Fila - Formulario de Registro e Inicio de sesión*/
+    .index_formulario_fila>input{
+        border-radius: 5px !important;
+        width: 95% !important;
+        padding: 0% 0%;
+        font-size: 2vw;
+    }
+
+    /*3º Fila - Formulario de recuperación de contraseña*/
+    .index_formulario_caja:last-child{
         font-size: 2.5vw;
     }
 
-    /*Formulario de Registro y Login*/
-    .encabezado_caja_registro {
-        width: 100%;
-        height: 75vh;
-    }
-
-    .encabezado_caja_registro_division:nth-child(2), .encabezado_caja_registro_division:nth-child(3){
-        height: 70vh;
-    } 
-
-    #registrar_desktop,  #sesion_desktop{
-        height: 60vh;
-    }
     /*Sección Localización y Sección Contacto*/
     #seccion_localizacion>div:first-child, #seccion_localizacion>div:last-child {
         width: 100%;

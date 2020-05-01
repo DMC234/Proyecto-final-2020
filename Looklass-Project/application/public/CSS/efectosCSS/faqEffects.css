@@ -1,0 +1,5 @@
+/*Sección F.A.Q y Términos y Condiciones*/
+.term_unfold:hover, .term_fold:hover{
+    transition: 1s;
+    transform: scale(1.1);
+}

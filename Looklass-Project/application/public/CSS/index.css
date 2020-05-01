@@ -10,7 +10,6 @@ a{
     color: white;
 }
 
-
 /*Encabezado*/
 #encabezado{
     width: 100%;
@@ -38,6 +37,10 @@ a{
     color: white;
     font-weight: bold;
     letter-spacing: 0.5vw;
+}
+
+.encabezado_caja:last-child{
+    cursor: pointer;
 }
     /*capa de filtro y logo*/
 #encabezado>div{
@@ -93,197 +96,142 @@ a{
     transition: 0.5s;
   }
 
-  .encabezado_caja_logo>div:nth-child(2)>a:hover{
-    background-color: rgba(29, 209, 161,0.6);
-    letter-spacing: 0.4vw;
-    transition: 0.5s;
-  }
-
-    /*capa de registro y login en desktop*/
-.encabezado_caja_registro{
+/*FORMULARIO DE REGISTRO E INICIO DE SESIÓN INDEX*/
+#index_formulario{
     position: absolute;
     top: 0;
     right: 0;
     width: 50%;
-    height: 71vh;
-    background-color: rgba(0, 0, 0, 0.75);
-    display: none;
-    grid-template-columns: auto auto;
-    color: white;
-    letter-spacing: 0.4vw;
+    height: 85vh;
     border: inset 2px rgba(133, 181, 204, 0.98);
-}
-        /*CSS-GRID DE LAS CAJAS*/
-
-        /*1ºFILA*/
-.encabezado_caja_registro_division:nth-child(1){
-    grid-column: 1/ 3;
-    height: 10vh;
-    display: flex;
-    text-align: center;
-}
-
-.x{
-    cursor: pointer;
-    border: inset 1px rgba(133, 181, 204, 0.98);
-    transition: 0.5s;
-}
-
-.x:hover{
-    transition: 0.5s;
-    background-color: #0984e3;
-}
-
-.encabezado_caja_registro_division:nth-child(1)>div:first-child, .encabezado_caja_registro_division:nth-child(1)>div:last-child{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.encabezado_caja_registro_division:nth-child(1)>div:first-child{
-    width: 80%;
-    height: auto;
-}
-
-.encabezado_caja_registro_division:nth-child(1)>div:last-child{
-    width: 20%;
-    height: auto;
-}
-
-        /*2ºFILA y 3º FILA*/
-.encabezado_caja_registro_division:nth-child(2), .encabezado_caja_registro_division:nth-child(3){
-    height: 40vh;
-    border: solid 1px rgba(210, 218, 226,0.5);
-} 
-
-        /*4º FILA*/
-.encabezado_caja_registro_division:nth-child(4){
-    grid-column: 1 / 3;
-    height: 20vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-            /*Formulario Registro*/
-#registrar_desktop{
-    width: 100%;
-    height: 35vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-}
-
-#registrar_desktop>article{
-    width: 100%;
-    text-align: center;
-}
-
-#registrar_desktop>article>input[type="text"]{
-    width: 80%;
-    padding: 0.2vw;
-    border-radius: 10px;
-    font-weight: bold;
-    text-align: center;
-}
-
-#registrar_desktop>article>input[type="submit"]{
-    padding: 0.4vw;
-    border-radius: 5px;
-    background-color: rgba(210, 218, 226,0.5);
-    font-weight: bold;
+    background-color: rgba(0, 0, 0, 0.75);
     color: white;
-    transition: 0.5s;
-    cursor: pointer;
-}
-
-#registrar_desktop>article>input[type="submit"]:hover{
-    transition: 0.5s;
-    background-color: rgba(133, 181, 204, 0.98);
-}
-            /*Formulario Iniciar Sesión*/
-#sesion_desktop{
-    width: 100%;
-    height: 35vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-}
-
-#sesion_desktop>article{
-    width: 100%;
-    text-align: center;
-}
-
-#sesion_desktop>article>input[type="text"],#sesion_desktop>article>input[type="password"]{
-    width: 80%;
-    padding: 0.2vw;
-    border-radius: 10px;
-    font-weight: bold;
-    text-align: center;
-}
-
-#sesion_desktop>article>input[type="submit"]{
-    padding: 0.4vw;
-    border-radius: 5px;
-    background-color: rgba(210, 218, 226,0.5);
-    font-weight: bold;
-    color: white;
-    transition: 0.5s;
-    cursor: pointer;
-}
-
-#sesion_desktop>article>input[type="submit"]:hover{
-    transition: 0.5s;
-    background-color: rgba(133, 181, 204, 0.98);
-}
-
-    /*Formulario Recuperación*/
-.encabezado_caja_registro_division:nth-child(4)>p{
-    font-size: 1.3vw;
-    font-weight: bold;
     letter-spacing: 0.4vw;
-    transition: 0.5s;
-    cursor: pointer;
-}
-.encabezado_caja_registro_division:nth-child(4)>p:hover{
-    transition: 0.5s;
-    color: rgba(72, 219, 251,0.8);
+    display: none;
+    overflow: hidden;
 }
 
-#sesion_recuperacion{
+    /*Divisiones de cajas del formulario*/
+.index_formulario_caja, .index_formulario_caja>div, .index_formulario_caja>form,
+.index_formulario_fila, .index_formulario_caja:last-child>div, #index_formulario_recuperacion{
+    display: flex;
     width: 100%;
-    height: 10vh;
-    margin-top: 1vw;
-    display: none;
-    justify-content: space-evenly;
+}
+
+    /*1º Fila - Titulo y boton de cerrar*/
+.index_formulario_caja:first-child{
+    height: 15vh;
+}
+
+.index_formulario_caja:first-child>div{
+    height: auto;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.3vw;
+}
+
+.index_formulario_caja:first-child>div:first-child{
+    width: 75%;
+}
+.index_formulario_caja:first-child>div:last-child{
+    width: 25%;
+    border: inset 1px rgba(133, 181, 204, 0.98);
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+/*2º Fila - Formulario de Registro e Inicio de sesión*/
+.index_formulario_caja:nth-child(2){
+    height: 48vh;
+}
+
+#index_formulario_registro, #index_formulario_iniciar_sesion{
+    width: 49%;
+    height: auto;
+    flex-direction: column;
+    justify-content: center;
+    border: solid 1px rgba(210, 218, 226,0.5);
+}
+
+.index_formulario_fila{
+    height: 15vh;
+    justify-content: center;
+    align-items: center;
+    border: solid 1px rgba(210, 218, 226,0.5);
+}
+
+.index_formulario_fila>input{
+    border-radius: 10px;
+    padding: 1% 0%;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.1vw;
+}
+
+.index_formulario_fila>input[type="text"], .index_formulario_fila>input[type="password"], .index_formulario_fila>input[type="email"]{
+    width: 80%;
+}
+
+.index_formulario_fila>input[type="submit"]{
+    width: 50%;
+    background-color: rgba(210, 218, 226,0.5);
+    color: white;
+    cursor: pointer;
+}
+
+/*3º Fila - Formulario de recuperación de contraseña*/
+.index_formulario_caja:last-child{
+    height: 20vh;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 1.3vw;
+}
+
+#index_formulario_recuperacion{
+    width: 100%;
+    height: 0vh;
+    overflow: hidden;
+}
+
+#index_formulario_recuperacion>div{
+    border: inset 1px rgba(133, 181, 204, 0.98);
+    width: 49%;
+    height: auto;
+    /*El contenido se ajusta al centro gracias a la clase que contiene
+      la etiqueta*/
+}
+
+/*Sección Mensaje de Error*/
+#seccion_busqueda_error, #seccion_busqueda_error>div{
+    display: flex;
+    justify-content: center;
+}
+#seccion_busqueda_error{
+    width: 100%;
+    height:16vh;
+    padding: 1% 0%;
+    background-image: linear-gradient(to bottom, rgba(133, 181, 204, 0.98), rgba(72, 219, 251,0.8));
+    background-size: cover;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+#seccion_busqueda_error>div{
+    width: 80%;
+    height:auto;
+    border:outset 1px silver;
+    background-color: rgba(0, 0, 0, 0.7);
     align-items: center;
 }
 
-#sesion_recuperacion>input[type="text"]{
-    width: 60%;
-    padding: 0.2vw;
-    border-radius: 10px;
-    font-weight: bold;
-    text-align: center;
+#seccion_busqueda_error>div>h3{
+   font-size: 1.5vw;
+   letter-spacing: 0.3vw;
+   color: white;
 }
 
-#sesion_recuperacion>input[type="submit"]{
-    padding: 0.4vw;
-    border-radius: 5px;
-    background-color: rgba(210, 218, 226,0.5);
-    font-weight: bold;
-    color: white;
-    transition: 0.5s;
-    cursor: pointer;
-}
-
-#sesion_recuperacion>input[type="submit"]:hover{
-    background-color: rgba(133, 181, 204, 0.98);
-    transition: 0.5s;
-    
-}
 
 /*Seccion Localizacion*/
 #seccion_localizacion{

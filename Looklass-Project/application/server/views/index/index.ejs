@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/css/index.css">
     <link rel="stylesheet" href="/css/fonts.css">
     <link rel="stylesheet" href="/css/responsive/responsiveindex.css">
+    <link rel="stylesheet" href="/css/efectosCSS/indexEffects.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
         integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 </head>
@@ -37,14 +38,81 @@
                     <img src="./img/logo.png" alt="logo">
                 </div>
                 <div>
-                    <h2>Tu centro ideal te está esperando</h2>
+                    <h2>TU CENTRO IDEAL TE ESTÁ ESPERANDO</h2>
                     <a href="/busqueda">
                         <p>BUSCAR</p>
                     </a>
                 </div>
             </div>
             <!--Formulario de registro-->
-            <div class="encabezado_caja_registro">
+            <!--FORMULARIO DE INDEX DE REGISTRO, INICIO DE SESIÓN Y RECUPERAR CONTRASEÑA-->
+        <div id="index_formulario">
+            <article class="index_formulario_caja">
+                <div>
+                 <h3>UNÉTE A NOSOTROS</h3>
+                </div>
+                <div>
+                    <h3>X</h3>
+                </div>
+            </article>
+            <article class="index_formulario_caja">
+                <!--Formulario de Registro-->
+                <form id="index_formulario_registro" action="/" method="POST">
+                 <div class="index_formulario_fila">
+                        <input type="text" name="registro_nombre_usuario" placeholder="Nombre de Usuario" required>
+                    </div>
+                    <div class="index_formulario_fila">
+                     <input type="password" name="registro_pwd" placeholder="Contraseña de Usuario" required>
+                 </div>
+                    <div class="index_formulario_fila">
+                        <input type="text" name="registro_nombre_real" placeholder="Nombre Personal" required>
+                    </div>
+                    <div class="index_formulario_fila">
+                      <input type="text" name="registro_apellido_real" placeholder="Apellido Personal" required>
+                 </div>
+                 <div class="index_formulario_fila">
+                     <input type="email" name="registro_email" placeholder="Correo Electrónico" required>
+                 </div>
+                 <div class="index_formulario_fila">
+                     <input type="submit" name="operacion" value="REGISTRARSE">
+                 </div>
+             </form>
+             <!--Formulario de Inicio de Sesión-->
+             <form id="index_formulario_iniciar_sesion" action="/" method="POST">
+                 <div class="index_formulario_fila">
+                     <input type="text" name="iniciar_sesion_nombre_usuario" placeholder="Nombre de Usuario / Correo Electrónico" required>
+                    </div>
+                 <div class="index_formulario_fila">
+                     <input type="password" name="iniciar_sesion_pwd" placeholder="Contraseña de Usuario" required> 
+                </div>
+                 <div class="index_formulario_fila">
+                     <input type="submit" name="operacion" value="INICIAR SESIÓN">
+                 </div>
+                </form>
+            </article>
+         <article class="index_formulario_caja">
+             <h3>Has olvidado la contraseña?</h3>
+                <form id="index_formulario_recuperacion" action="/" method="POST">
+                    <div class="index_formulario_fila">
+                      <input type="email" name="recuperacion_email" placeholder="Correo Electrónico" required>
+                  </div>
+                 <div class="index_formulario_fila">
+                     <input type="submit" name="operacion" value="RECUPERAR CUENTA">
+                 </div>
+                </form>
+            </article>
+        </div>
+
+
+
+
+
+
+
+
+
+
+            <!-- <div class="encabezado_caja_registro">
                 <div class="encabezado_caja_registro_division">
                     <div>
                         <h3>ÚNETE A NOSOTROS</h3>
@@ -59,19 +127,19 @@
                             <h4>REGISTRO</h4>
                         </article>
                         <article>
-                            <input type="text" name="r_n_usuario" placeholder="Nombre de usuario">
+                            <input type="text" name="r_n_usuario" placeholder="Nombre de usuario" required>
                         </article>
                         <article>
-                            <input type="text" name="r_pwd" placeholder="Contraseña"> 
+                            <input type="text" name="r_pwd" placeholder="Contraseña" required> 
                         </article>
                         <article>
-                            <input type="text" name="r_n_personal" placeholder="Nombre Personal">
+                            <input type="text" name="r_n_personal" placeholder="Nombre Personal" required>
                         </article>
                         <article>
-                            <input type="text" name="r_apellidos" placeholder="Apellidos">
+                            <input type="text" name="r_apellidos" placeholder="Apellidos" required>
                         </article>
                         <article>
-                            <input type="text" name="r_correo" placeholder="Correo Electrónico">
+                            <input type="text" name="r_correo" placeholder="Correo Electrónico" required>
                         </article>
                         <article>
                             <input type="submit" name="operacion" value="REGISTRARSE">
@@ -101,10 +169,17 @@
                         <input type="submit" value="RECUPERAR CUENTA" name="operacion">
                     </form>
                 </div>
-            </div>
+            </div> -->
         </div>
     </header>
-
+    <!--Sección de Mensajes de error-->
+    <%if(mensaje != null){%>
+        <section id="seccion_busqueda_error">
+            <div>
+                <h3><%=mensaje%></h3>
+            </div>
+        </section>
+    <%}%>
    <!--Sección Localización-->
    <section id="seccion_localizacion">
     <div>
@@ -173,5 +248,5 @@
         </div>
     </footer>
 </body>
-<script src="./js/extensions.js"></script>
+<script src="./js/indexextensions.js"></script>
 </html>

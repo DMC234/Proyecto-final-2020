@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/css/busqueda.css">
     <link rel="stylesheet" href="/css/fonts.css">
     <link rel="stylesheet" href="/css/responsive/responsivebusqueda.css">
+    <link rel="stylesheet" href="/css/efectosCSS/busquedaEffects.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
         integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 </head>
@@ -19,40 +20,72 @@
             <nav class="encabezado_caja">
                 <%if(usuario == null){%>
                 <div><a href="#becas">BECAS</a></div>
-                <div><img src="/IMG/logolooklass.png" alt=""></div>
-                <div><a href="">INICIAR SESIÓN</a></div>
+                <div><a href="/"><img src="/IMG/logolooklass.png" alt=""></a></div>
+                <div id="busqueda_abrir_sesion"><h4>INICIAR SESIÓN</h4></div>
                 <%}else{%>
                 <div><a href="/busqueda?operacion=salir_sesion">Salir de la sesión</a></div>
                 <div><img src="/IMG/logolooklass.png" alt=""></div>
-                <div><h4 id="sesion_busqueda">Bienvenido | <%=usuario.nombreUsuario%></h4></a></div>
+                <div class="encabezado_caja_nosesion"><h4 id="sesion_busqueda">Bienvenid@ | <%=usuario.nombreUsuario%></h4></a></div>
                 <%}%>
             </nav>
+            
             <div class="encabezado_caja">
                 <h2>BUSCADOR DE CENTROS</h2>
                 <h3>ENCUENTRA TU CENTRO FÁCILMENTE</h3>
+                <div id="encabezado_caja_iniciar_sesion">
+                    <form id="busqueda_iniciar_sesion" action="/" method="post">
+                        <article>
+                            <div><h4>INICIAR SESIÓN EN LA PLATAFORMA</h4></div>
+                            <div id="busqueda_cerrar_formulario">X</div>
+                        </article>
+                        <article>
+                            <input type="text" name="iniciar_sesion_nombre_usuario" placeholder="Nombre de usuario / Correo Electrónico" required>
+                        </article>
+                        <article>
+                            <input type="password" name="iniciar_sesion_pwd" placeholder="Contraseña" required>
+                        </article>
+                        <article>
+                            <input type="submit" name="operacion" value="INICIAR SESIÓN">
+                        </article>
+                    </form>
+                    <article>
+                        <div>
+                            <h4>RECUPERAR CONTRASEÑA</h4>
+                            <form id="busqueda_sesion_recuperacion" action="/" method="POST">
+                                <input type="email" name="recuperacion_email" placeholder="Correo de recuperación" required>
+                                <input type="submit" value="RECUPERAR CUENTA" name="operacion">
+                            </form>
+                        </div>
+                        <div>
+                            <a href="/"><h4>REGISTRARSE</h4></a>
+                        </div>
+                    </article>
+                </div>
             </div>
             <div class="encabezado_caja">
                 <form id="form_busqueda" action="/busqueda" method="POST">
                     <div class="form_caja">
                         <div>
-                            <article>
-                                <input type="radio" id="star_1" name="b_valoracion" value="1">
+                            <!--Al igual que en el formulario de valoración de centros
+                                esta clase no tiene propiedades CSS-->
+                            <article class="form_caja_busqueda">
+                                <input type="radio" name="b_valoracion" value="1">
                                 <i class="fas fa-star"></i>
                             </article>
-                            <article>
-                                <input type="radio" id="star_2" name="b_valoracion" value="2">
+                            <article class="form_caja_busqueda">
+                                <input type="radio" name="b_valoracion" value="2">
                                 <i class="fas fa-star"></i>
                             </article>
-                            <article>
-                                <input type="radio" id="star_3" name="b_valoracion" value="3">
+                            <article class="form_caja_busqueda">
+                                <input type="radio" name="b_valoracion" value="3">
                                 <i class="fas fa-star"></i>
                             </article>
-                            <article>
-                                <input type="radio" id="star_4" name="b_valoracion" value="4">
+                            <article class="form_caja_busqueda">
+                                <input type="radio" name="b_valoracion" value="4">
                                 <i class="fas fa-star"></i>
                             </article>
-                            <article>
-                                <input type="radio" id="star_5" name="b_valoracion" value="5">
+                            <article class="form_caja_busqueda">
+                                <input type="radio" name="b_valoracion" value="5">
                                 <i class="fas fa-star"></i>
                             </article>
                         </div>  
@@ -80,28 +113,33 @@
         <div>
             <div class="seccion_tendencia_caja">
                 <article></article>
-                <article>
-                    <h4>Informática</h4>
-                </article>
+                <a href="/busqueda?operacion=tendencia&tematica_centro=informatica">
+                    <article>
+                        <h4>Informática</h4>
+                    </article>
+                </a>
             </div>
             <div class="seccion_tendencia_caja">
                 <article></article>
-                <article>
-                    <h4>Marketing</h4>
-                </article>
+                <a href="/busqueda?operacion=tendencia&tematica_centro=marketing">
+                    <article>
+                        <h4>Marketing</h4>
+                    </article>
+                </a>
             </div>
             <div class="seccion_tendencia_caja">
                 <article></article>
-                <article>
-                    <h4>Farmacia</h4>
-                </article>
+                <a href="/busqueda?operacion=tendencia&tematica_centro=enfermeria">
+                    <article>
+                        <h4>Farmacia</h4>
+                    </article>
+                </a>
             </div>
         </div>
     </section>
 
     <!--Sección Búsqueda-->
     <section id="seccion_busqueda">
-        <!-- <div class="lds-dual-ring"></div> -->
         <div>
         <%if(centros == null){%>
             <div class="error_busqueda">
@@ -109,7 +147,7 @@
             </div>
         <%}else{%>
             <%for(let i = 0; i < centros.length; i++){%>
-            <!--HTML-CARD DE CSS -->
+               <!--HTML-CARD DE CSS -->
             <div class="seccion_busqueda_resultado">
                 <!--1º SEGMENTO - Logo del centro y Localización-->
                 <div class="seccion_busqueda_caja">
@@ -128,7 +166,18 @@
                 <!--3º SEGMENTO - Visitas y Valoración-->
                 <div class="seccion_busqueda_caja">
                     <article><h3><%=visitas[i]%></h3><i class="far fa-eye"></i></article>
-                    <article><h3><%=valoracion[i]%> &#9733;&#9733;&#9733;&#9733;</h3></article>
+                    <article>
+                        <!--Si la valoración del centro es 0, no está valorado directamente-->
+                       <%if(valoracion[i] == 0){%>
+                        <h3>SIN VALORAR</h3>
+                       <%}else{%>
+                        <h3><%=valoracion[i]%></h3>
+                        <!--Pintamos tantas estrellas como el valor del centro tenga-->
+                            <%for(let j = 0; j < valoracion[i]; j++){%>
+                            <p>&#9733;</p>
+                            <%}%>
+                        <%}%>
+                    </article>
                 </div>
                 <!--4º SEGMENTO - Descripción del centro-->
                 <div class="seccion_busqueda_caja">
@@ -176,10 +225,10 @@
                     </div>
                     <%}else{%>
                     <div class="seccion_busqueda_caja acceso_anonimo">
-                            <!--Jugamos con el método Get para enviar el enlace, crear la fila y redireccionar.-->
-                            <a href="/busqueda?operacion=visitar&r=<%=centros[i].enlace%>">
-                                <h3>Saber Más</h3>
-                            </a> 
+                        <!--Jugamos con el método Get para enviar el enlace, crear la fila y redireccionar.-->
+                        <a href="/busqueda?operacion=visitar&r=<%=centros[i].enlace%>">
+                            <h3>Saber Más</h3>
+                        </a> 
                     </div>  
                     <%}%>
                     <!--Se cierra el formulario de valoración hasta aquí para que englobe las etiquetas
@@ -189,7 +238,7 @@
             <%}%>
         <%}%>
         </div>
-    </section>  
+    </section> 
     <!--Sección Becas-->
     <section id="becas">
         <div><h2>BECAS</h2></div>
@@ -303,5 +352,5 @@
         </div>
     </footer>
 </body>
-<script src="/JS/extensions.js"></script>
+<script src="/JS/busquedaextensions.js"></script>
 </html>
