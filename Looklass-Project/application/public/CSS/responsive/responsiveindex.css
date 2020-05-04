@@ -57,6 +57,15 @@
         padding: 2% 0%;
         font-size: 3vw;
     }
+
+        /*Términos y Condiciones*/
+    .index_formulario_fila:nth-child(6)>div{
+        justify-content: center;
+    }
+    .index_formulario_fila:nth-child(6)>div>a{
+        font-size: 2.7vw; 
+    }
+
         /*3º Fila - Formulario de recuperación de contraseña*/
     .index_formulario_caja:last-child{
         font-size: 3vw;
@@ -148,6 +157,13 @@
         font-size: 2vw;
     }
 
+         /*Términos y Condiciones*/
+    .index_formulario_fila:nth-child(6)>div{
+        justify-content: center;
+    }
+    .index_formulario_fila:nth-child(6)>div>a{
+        font-size: 1.95vw; 
+    }
     /*3º Fila - Formulario de recuperación de contraseña*/
     .index_formulario_caja:last-child{
         font-size: 2.5vw;

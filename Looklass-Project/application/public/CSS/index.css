@@ -113,7 +113,8 @@ a{
 
     /*Divisiones de cajas del formulario*/
 .index_formulario_caja, .index_formulario_caja>div, .index_formulario_caja>form,
-.index_formulario_fila, .index_formulario_caja:last-child>div, #index_formulario_recuperacion{
+.index_formulario_fila, .index_formulario_caja:last-child>div, #index_formulario_recuperacion,
+.index_formulario_fila:nth-child(6)>div{
     display: flex;
     width: 100%;
 }
@@ -146,7 +147,7 @@ a{
 }
 
 #index_formulario_registro, #index_formulario_iniciar_sesion{
-    width: 49%;
+    width: 50%;
     height: auto;
     flex-direction: column;
     justify-content: center;
@@ -177,6 +178,24 @@ a{
     background-color: rgba(210, 218, 226,0.5);
     color: white;
     cursor: pointer;
+}
+
+    /*Términos y condiciones*/
+
+.index_formulario_fila:nth-child(6){
+    justify-content: flex-start;
+}
+
+.index_formulario_fila:nth-child(6)>div{
+    height: auto;
+    justify-content: center;
+}
+
+.index_formulario_fila:nth-child(6)>div>a{
+    color: cyan;
+    letter-spacing: 0vw;
+    font-weight: bold; 
+    font-size: 1.1vw; 
 }
 
 /*3º Fila - Formulario de recuperación de contraseña*/

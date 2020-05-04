@@ -14,7 +14,7 @@ async function iniciarSesion(request,response){
     console.log(request.body.iniciar_sesion_nombre_usuario);
     if(request.body.iniciar_sesion_nombre_usuario.includes('@')){
         usuario_sesion = await usuario_modelo.findOne({where:{
-            email:request.body.iniciar_sesion_nombre_usuario,
+            correo:request.body.iniciar_sesion_nombre_usuario,
             pwd:request.body.iniciar_sesion_pwd
         }});
     }else{
@@ -38,16 +38,21 @@ async function registrarUsuario(request,response){
     let comprobar_disponibilidad_usuario = await usuario_modelo.findOne({where:{nombreUsuario:request.body.registro_nombre_usuario}});
 
     if(comprobar_disponibilidad_email == null && comprobar_disponibilidad_usuario == null){
-        usuario_sesion = await usuario_modelo.create({
-            idUsuario: 0,
-            nombreUsuario: request.body.registro_nombre_usuario,
-            pwd: request.body.registro_pwd,
-            nombreReal: request.body.registro_nombre_real,
-            apellidoReal: request.body.registro_apellido_real,
-            correo: request.body.registro_email,
-            d_mac:null
-        });
-        mensajeIndex(response,'USUARIO REGISTRADO CORRECTAMENTE');
+        if(request.body.registro_terminos == 'aceptado'){
+            usuario_sesion = await usuario_modelo.create({
+                idUsuario: 0,
+                nombreUsuario: request.body.registro_nombre_usuario,
+                pwd: request.body.registro_pwd,
+                nombreReal: request.body.registro_nombre_real,
+                apellidoReal: request.body.registro_apellido_real,
+                correo: request.body.registro_email,
+                d_mac:null
+            });
+            mensajeIndex(response,'USUARIO REGISTRADO CORRECTAMENTE');
+        }else{
+            mensajeIndex(response,'DEBES ACEPTAR LOS TÉRMINOS PARA REGISTRARTE');
+        }
+        
     }else{
         mensajeIndex(response,'EL CORREO O USUARIO YA SE ENCUENTRA REGISTRADO');
     }
@@ -75,6 +80,7 @@ exports.operacionesIndex = (request, response) => {
     console.log(request.body);
     if (request.body.operacion == "REGISTRARSE") {
         console.log('dentro de registrarse');
+        console.log(request.body);
         registrarUsuario(request,response);
     }else if(request.body.operacion == 'INICIAR SESIÓN'){
         console.log('dentro de iniciar sesión');
