@@ -127,7 +127,7 @@ exports.enviarEmail = async function(correo_destino){
         service:'gmail',
         auth:{
             user:'rabahretmix@gmail.com',
-            pass:'Edr_1952000'
+            pass:'SilentHill4_952000*'
         }
     });
         

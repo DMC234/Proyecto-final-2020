@@ -4,6 +4,6 @@ module.exports = {
         sitioWeb:'Looklass [desarrollo]'
     },
     production:{
-        sitioWeb:'Looklass - Tu centro al alcance de todos'
+        sitioWeb:'Looklass'
     }
 }

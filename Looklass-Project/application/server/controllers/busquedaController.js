@@ -85,15 +85,19 @@ async function buscarRating(response, valoracion, fila_recorrido){
 
 //FUNCIÓN PARA BUSCAR CENTROS POR TEMÁTICA
 async function buscarTematica(response, tematica, fila_recorrido){
+
+    let tematica_normalizada = tematica.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    console.log(tematica_normalizada);
+
     if(fila_recorrido == undefined || fila_recorrido == null){
         fila_recorrido = await centro_modelo.findAll();
     }else{
         fila_recorrido = await fila_recorrido;
     }
-
+    
     for(let i = 0; i < fila_recorrido.length; i++){
         let fila_tematica = fila_recorrido[i].tematica;
-        if(fila_tematica.includes(tematica,0)){
+        if(fila_tematica.includes(tematica_normalizada,0)){
             console.log('lo incluye');
             tematica_resultados.push(fila_tematica);
         }else{
@@ -125,12 +129,23 @@ async function visitarCentro(response, enlaceCentro){
         if(interaccion_sesion != null){
             console.log('la visita ya cuenta');
         }else{
-           await interaccion_modelo.create({
+         let compensar_nota = await interaccion_modelo.findOne({where:{numeroCentro:centro_sesion.numeroCentro}});
+         console.log(compensar_nota.valoracion);   
+         if(compensar_nota.valoracion == null){
+            await interaccion_modelo.create({
                 idUsuario:usuario_sesion.idUsuario,
                 visita:1,
                 valoracion:0,
                 numeroCentro:centro_sesion.numeroCentro
             });
+         }else{
+            await interaccion_modelo.create({
+                idUsuario:usuario_sesion.idUsuario,
+                visita:1,
+                valoracion:compensar_nota.valoracion,
+                numeroCentro:centro_sesion.numeroCentro
+            });
+         }
         } 
     }
     //redirigimos al usuario al centro buscado.
@@ -170,7 +185,6 @@ function redirigirError(response,fila_recorrido,mensaje){
         return fila_recorrido;
     }
 }
-
 
 //Funciones de exportación
 exports.obtenerSesionIndex = function(usuario_sesion_index){

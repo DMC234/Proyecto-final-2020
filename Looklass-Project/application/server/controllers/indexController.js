@@ -52,7 +52,6 @@ async function registrarUsuario(request,response){
         }else{
             mensajeIndex(response,'DEBES ACEPTAR LOS TÉRMINOS PARA REGISTRARTE');
         }
-        
     }else{
         mensajeIndex(response,'EL CORREO O USUARIO YA SE ENCUENTRA REGISTRADO');
     }
