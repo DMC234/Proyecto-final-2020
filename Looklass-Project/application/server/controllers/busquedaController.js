@@ -119,6 +119,8 @@ async function buscarLocalizacion(response, localizacion){
  
 //FUNCIÓN PARA VISITAR EL CENTRO Y CONTAR LA VISITA
 async function visitarCentro(response, enlaceCentro){
+
+    console.log('ENTRADA AL MÉTODO DE CONTAR VISITA');
     if(usuario_sesion != null){
         centro_sesion = await centro_modelo.findOne({where:{enlace:enlaceCentro}});
         let interaccion_sesion = await interaccion_modelo.findOne({where:{
@@ -130,8 +132,8 @@ async function visitarCentro(response, enlaceCentro){
             console.log('la visita ya cuenta');
         }else{
          let compensar_nota = await interaccion_modelo.findOne({where:{numeroCentro:centro_sesion.numeroCentro}});
-         console.log(compensar_nota.valoracion);   
-         if(compensar_nota.valoracion == null){
+           console.log(compensar_nota);
+         if(compensar_nota == null){
             await interaccion_modelo.create({
                 idUsuario:usuario_sesion.idUsuario,
                 visita:1,
@@ -159,7 +161,8 @@ async function valorarCentro(response, notaCentro, idCentro){
     if(fila_centro == null){
         mensajeBusqueda(response,'DEBES VISITAR PRIMERO EL CENTRO ANTES DE VALORARLO',null);
     }else{
-        consulta = await db.query(`UPDATE interaccion set valoracion = ${notaCentro} where numeroCentro = ${idCentro}`);
+        console.log(usuario_sesion.idUsuario);
+        consulta = await db.query(`UPDATE interaccion set valoracion = ${notaCentro} where numeroCentro = ${idCentro} AND idUsuario = ${usuario_sesion.idUsuario}`);
         mensajeBusqueda(response,`CENTRO ${centro_sesion.nombreCentro} VALORADO EN ${notaCentro} ESTRELLAS`,null);
     }
 }
